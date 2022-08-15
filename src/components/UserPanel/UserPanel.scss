@@ -1,0 +1,57 @@
+.user {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+
+    & .user__avatar {
+      > img {
+        background-color: var(--bg-black-400);
+      }
+    }
+
+    & .user__name {
+      color: var(--color-white);
+    }
+
+    & .user__role {
+      color: var(--color-primary-hover);
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: var(--bg-black-500);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+  }
+
+  &__role,
+  &__name {
+    transition: all 0.3s ease;
+  }
+
+  &__role {
+    display: flex;
+    align-items: center;
+    color: var(--color-primary);
+
+    > svg {
+      margin-left: 5px;
+    }
+  }
+}

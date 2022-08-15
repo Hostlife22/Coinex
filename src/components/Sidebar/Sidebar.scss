@@ -7,6 +7,7 @@
   height: 100%;
   padding: 10px 14px;
   background-color: var(--bg-black-700);
+  box-shadow: 8px 0 32px rgb(0 0 0 / 25%);
   transition: all 0.5s ease;
 
   &__heading {
@@ -97,6 +98,15 @@
     transform: translateY(-50%) rotate(180deg);
     cursor: pointer;
     transition: all 0.5s ease;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: red;
+      content: '';
+    }
   }
 
   &__menu {
@@ -136,6 +146,12 @@
 
     .sidebar__btn-toggle {
       transform: translateY(-50%) rotate(0deg);
+    }
+
+    & ~ .home {
+      left: 78px;
+      width: calc(100% - 78px);
+      height: 100vh;
     }
   }
 }
