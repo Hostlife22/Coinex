@@ -8,4 +8,5 @@ export { default as Htag } from './Htag/Htag';
 export { default as Input } from './Input/Input';
 export { default as Layout } from './Layout/Layout';
 export { default as Ptag } from './Ptag/Ptag';
+export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as UserForm } from './UserForm/UserForm';

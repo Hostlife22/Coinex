@@ -3,7 +3,7 @@ import './AuthLayout.scss';
 
 const AuthLayout = () => {
   return (
-    <main className="main">
+    <main className="container">
       <Outlet />
     </main>
   );

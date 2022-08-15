@@ -1,6 +1,8 @@
-.main {
+.container {
   display: flex;
-  flex: 1;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  min-height: 100vh;
+  color: var(--color-white);
+  background-color: var(--bg-black-700);
 }
