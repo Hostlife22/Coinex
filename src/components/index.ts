@@ -1,3 +1,11 @@
+export { default as AuthLayout } from './AuthLayout/AuthLayout';
+export { default as Button } from './Button/Button';
+export { default as Card } from './Card/Card';
+export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as Footer } from './Footer/Footer';
 export { default as Header } from './Header/Header';
+export { default as Htag } from './Htag/Htag';
+export { default as Input } from './Input/Input';
 export { default as Layout } from './Layout/Layout';
+export { default as Ptag } from './Ptag/Ptag';
+export { default as UserForm } from './UserForm/UserForm';
