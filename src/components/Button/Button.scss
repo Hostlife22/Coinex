@@ -1,0 +1,40 @@
+.btn {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.primary {
+  color: var(--bg-black-600);
+  background-color: var(--color-primary);
+}
+
+.primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.ghost {
+  color: #000;
+  background: aqua;
+}
+
+.ghost:hover {
+  color: var(--color-white);
+  background-color: rgb(76 196 196);
+}
+
+.secondary {
+  color: #000;
+  background: lightpink;
+}
+
+.secondary:hover {
+  color: var(--color-white);
+  background-color: rgb(211 99 116);
+}
