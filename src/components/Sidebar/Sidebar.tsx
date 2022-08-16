@@ -8,8 +8,6 @@ const Sidebar = ({ isOpen, handleMenu }: ISidebarProps) => {
   return (
     <>
       <nav className={cn('sidebar', { close: isOpen })}>
-        {/* <Logo handleMenu={handleMenu} /> */}
-
         <div className="sidebar__menu-bar">
           <div className="sidebar__menu">
             <li className="sidebar__search-box">

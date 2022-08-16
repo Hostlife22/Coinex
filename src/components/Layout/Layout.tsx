@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Footer, Header, Sidebar } from '..';
+import { Header, Sidebar } from '..';
 import './Layout.scss';
 
 const Layout = () => {
@@ -15,7 +15,7 @@ const Layout = () => {
       <main className="wrapper">
         <Header isOpen={openSidebar} handleMenu={handleMenu} />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </div>
   );
