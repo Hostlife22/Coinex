@@ -18,3 +18,28 @@ export const checkNewRegister = (): string | null => {
 
   return null;
 };
+
+export const formatAsPercent = (num: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num / 100);
+};
+
+export const formatAsCurrency = (num: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(num);
+};
+
+export const comparePrice = (a: number, b: number): number => {
+  if (a > b) {
+    return 1;
+  } else if (a < b) {
+    return -1;
+  }
+
+  return 0;
+};

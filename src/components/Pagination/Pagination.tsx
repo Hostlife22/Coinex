@@ -43,13 +43,18 @@ function Pagination({
         onClick={onPrevious}>
         <div className={cn('arrow', 'left')} />
       </li>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, i) => {
         if (pageNumber === DOTS || typeof pageNumber === 'string') {
-          return <li className={cn('pagination__item', 'dots')}>&#8230;</li>;
+          return (
+            <li className={cn('pagination__item', 'dots')} key={i}>
+              &#8230;
+            </li>
+          );
         }
 
         return (
           <li
+            key={i}
             className={cn('pagination__item', {
               selected: pageNumber === currentPage,
             })}
