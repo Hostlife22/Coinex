@@ -1,6 +1,6 @@
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 70px;
   left: 0;
   z-index: 100;
   width: 250px;
@@ -9,10 +9,6 @@
   background-color: var(--bg-black-700);
   box-shadow: 8px 0 32px rgb(0 0 0 / 25%);
   transition: all 0.5s ease;
-
-  &__heading {
-    position: relative;
-  }
 
   &__search-box {
     background-color: var(--color-white);
@@ -34,22 +30,10 @@
     }
   }
 
-  &__image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 40px;
-      border-radius: 6px;
-    }
-  }
-
   li {
     display: flex;
     align-items: center;
     height: 40px;
-    margin-top: 10px;
     list-style: none;
 
     a {
@@ -62,24 +46,6 @@
       border-radius: 6px;
       transition: all 0.3s ease;
     }
-  }
-
-  &__image-text {
-    display: flex;
-    align-items: center;
-  }
-
-  &__name {
-    margin-left: -5px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-
-  &__text {
-    font-weight: 500;
-    font-size: 17px;
-    white-space: nowrap;
-    opacity: 1;
   }
 
   &__btn-toggle {
@@ -110,7 +76,7 @@
   }
 
   &__menu {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   &__menu-bar {
@@ -140,15 +106,15 @@
   &.close {
     width: 88px;
 
-    .sidebar__text {
-      opacity: 0;
+    & .sidebar__search-box {
+      background-color: var(--bg-black-700);
+
+      input {
+        background-color: var(--bg-black-700);
+      }
     }
 
-    .sidebar__btn-toggle {
-      transform: translateY(-50%) rotate(0deg);
-    }
-
-    & ~ .home {
+    & ~ .wrapper {
       left: 78px;
       width: calc(100% - 78px);
       height: 100vh;
