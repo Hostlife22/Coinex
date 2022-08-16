@@ -4,7 +4,7 @@ import { Footer, Header, Sidebar } from '..';
 import './Layout.scss';
 
 const Layout = () => {
-  const [openSidebar, setOpenSidebar] = useState<boolean>(true);
+  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
   const handleMenu = () => {
     setOpenSidebar((prev) => !prev);
