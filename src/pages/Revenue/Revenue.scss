@@ -1,0 +1,77 @@
+.revenue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+  padding: 20px;
+
+  &__container {
+    width: 80%;
+  }
+
+  &__overview {
+    padding: 20px;
+  }
+
+  &__date-range {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  &__overview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-gray-200);
+  }
+
+  &__overview-title {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  &__option {
+    cursor: pointer;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+
+    &-left {
+      display: flex;
+      align-items: center;
+    }
+
+    &-div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+    }
+
+    &-details {
+      margin-left: 15px;
+    }
+
+    &-title {
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    &-time {
+      opacity: 0.5;
+    }
+
+    &-price {
+      font-weight: 600;
+    }
+  }
+}
