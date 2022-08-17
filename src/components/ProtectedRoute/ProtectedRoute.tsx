@@ -5,7 +5,6 @@ function ProtectedRoute() {
   const { auth } = useAuth();
   const location = useLocation();
 
-  console.log(auth);
   return auth ? <Outlet /> : <Navigate to={'/auth'} state={{ from: location }} />;
 }
 
