@@ -1,25 +1,8 @@
 .user {
+  position: relative;
   display: flex;
   gap: 16px;
   align-items: center;
-
-  &:hover {
-    cursor: pointer;
-
-    & .user__avatar {
-      > img {
-        background-color: var(--bg-black-400);
-      }
-    }
-
-    & .user__name {
-      color: var(--color-white);
-    }
-
-    & .user__role {
-      color: var(--color-primary-hover);
-    }
-  }
 
   &__wrapper {
     display: flex;
@@ -52,6 +35,13 @@
 
     > svg {
       margin-left: 5px;
+    }
+  }
+
+  &__logout {
+    svg {
+      font-size: 20px;
+      cursor: pointer;
     }
   }
 }

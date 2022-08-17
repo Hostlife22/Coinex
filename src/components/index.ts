@@ -14,6 +14,7 @@ export { default as Layout } from './Layout/Layout';
 export { default as Logo } from './Logo/Logo';
 export { default as Modal } from './Modal/Modal';
 export { default as Pagination } from './Pagination/Pagination';
+export { default as ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
 export { default as Ptag } from './Ptag/Ptag';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as UserForm } from './UserForm/UserForm';

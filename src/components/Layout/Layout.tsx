@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { Header, Sidebar } from '..';
 import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
 import './Layout.scss';
@@ -18,6 +19,7 @@ const Layout = () => {
         <Header isOpen={openSidebar} handleMenu={handleMenu} />
         <Outlet />
       </main>
+      <ToastContainer autoClose={2000} />
     </div>
   );
 };

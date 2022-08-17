@@ -11,8 +11,32 @@ export const LOCALSTORAGE_KEY_ID = 'newAccount';
 export const PAGE_SIZE = 10;
 export const DOTS = '...';
 
+export const MESSAGES = Object.freeze({
+  signUp: {
+    success: 'User Register Successfully',
+    error: 'Wrong registration data',
+  },
+  signIn: {
+    success: 'User Login Successfully',
+    error: 'Invalid email or password',
+  },
+  validation: {
+    name: 'Name must be at least 2 characters',
+    email: 'Please enter a valid email address',
+    password: 'Password must be at least 8 characters',
+    required: {
+      name: 'Name is required',
+      email: 'Email is required',
+      password: 'Password is required',
+    },
+  },
+});
+
 export const API = Object.freeze({
   auth: {
     getUrl: () => 'signin',
+  },
+  user: {
+    getUrl: (id?: string) => `users${'/' + id || ''}`,
   },
 });
