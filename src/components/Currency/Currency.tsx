@@ -2,6 +2,7 @@ import cn from 'classnames';
 import millify from 'millify';
 import { useEffect, useMemo, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { Button, Pagination } from '..';
 import { CRYPTOCURRENCY_URL, PAGE_SIZE } from '../../common/constants';
 import { comparePrice, formatAsCurrency, formatAsPercent } from '../../common/helpers';
@@ -14,6 +15,7 @@ function Currency() {
   const [assetsList, setAssetsList] = useState<ICoin[]>([]);
   const [change, setChange] = useState<{ [key: string]: string } | null>(null);
   const { data } = useGetAllCryptosQuery();
+  const navigation = useNavigate();
 
   const changedId = new Map();
 
@@ -130,7 +132,10 @@ function Currency() {
                 </td>
 
                 <td>
-                  <Button appearance="primary" className={cn('cryptocurrency__btn')}>
+                  <Button
+                    appearance="primary"
+                    className={cn('cryptocurrency__btn')}
+                    onClick={() => navigation(`/crypto/${cryptocurrency.id}`)}>
                     <FaPlus />
                   </Button>
                 </td>

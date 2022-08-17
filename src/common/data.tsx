@@ -200,3 +200,26 @@ export const previousExpenses = [
     iconBackgroundColor: '#4BA83D',
   },
 ];
+
+export const days = [
+  {
+    id: 2,
+    day: 7,
+  },
+  {
+    id: 3,
+    day: 14,
+  },
+  {
+    id: 4,
+    day: 30,
+  },
+  {
+    id: 5,
+    day: 60,
+  },
+  {
+    id: 6,
+    day: 120,
+  },
+];

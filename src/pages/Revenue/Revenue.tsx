@@ -19,7 +19,7 @@ function Expenses() {
           <Htag tag="h2" className="revenue__date-range">
             01 - 18 August, 2022
           </Htag>
-          <ResponsiveContainer width="100%" height="9%">
+          <ResponsiveContainer width="100%" className={'revenue__chart'}>
             <BarChart data={dataChart}>
               <Bar dataKey="uv" fill="rgba(21, 122, 255, .2)" onMouseOver={onMouseOver}>
                 {dataChart.map((entry, index) => (

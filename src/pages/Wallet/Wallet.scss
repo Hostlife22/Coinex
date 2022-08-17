@@ -1,0 +1,48 @@
+.wallet {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+  padding: 30px 20px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    max-width: 700px;
+    padding: 20px;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+
+  &__card {
+    flex: 1;
+    max-width: 200px;
+    padding: 20px;
+
+    &:nth-child(1) {
+      background-color: rgb(75 168 61);
+    }
+
+    &:nth-child(2) {
+      background-color: rgb(220 52 52);
+    }
+
+    &:nth-child(3) {
+      background-color: rgb(50 167 226);
+    }
+  }
+}

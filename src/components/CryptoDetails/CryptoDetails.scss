@@ -1,0 +1,27 @@
+.cryptodetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__title {
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--bg-black-400);
+    opacity: 0.9;
+
+    &-name {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}

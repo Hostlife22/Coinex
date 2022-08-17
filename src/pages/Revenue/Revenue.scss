@@ -19,6 +19,10 @@
     opacity: 0.5;
   }
 
+  &__chart {
+    height: 100px !important;
+  }
+
   &__overview-header {
     display: flex;
     align-items: center;
