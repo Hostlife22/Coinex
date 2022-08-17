@@ -1,0 +1,85 @@
+.modal {
+  position: fixed;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &,
+  &__overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &__overlay {
+    position: absolute;
+    background-color: rgb(0 23 31 / 36%);
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--bg-black-700);
+  }
+
+  &__title {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__user {
+    justify-content: center;
+    pointer-events: none;
+
+    h3 {
+      display: none;
+    }
+  }
+
+  &__input {
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      appearance: none;
+    }
+
+    input[type='number'],
+    input[type="number"]:hover,
+    input[type="number"]:focus {
+      appearance: textfield;
+      appearance: none;
+    }
+  }
+
+  &__disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+
+    > svg {
+      color: var(--color-white);
+      font-size: 24px;
+    }
+  }
+
+  &_active {
+    display: flex;
+  }
+}

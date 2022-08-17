@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { days } from '../../common/data';
-import { Button, Card, Chart, CryptoDetails, Htag, Ptag } from '../../components';
+import { Button, Card, Chart, CryptoDetails, Htag, Modal, Ptag } from '../../components';
 import { useGetCryptoHistoryQuery, useGetCryptoQuery } from '../../features/crypto/cryptoApiSlice';
 
 import './CryptoPage.scss';
@@ -11,6 +11,7 @@ import './CryptoPage.scss';
 const CryptoPage = () => {
   const { id } = useParams();
   const [selectedDay, setSelectedDay] = useState<number>(7);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { data: cryptosData, isLoading } = useGetCryptoHistoryQuery({ id: id || '', interval: 'd1' });
   const { data: coinData } = useGetCryptoQuery(id || '');
 
@@ -29,7 +30,7 @@ const CryptoPage = () => {
           <Htag tag="h1" className="crypto__title">
             {coinData?.data.name}{' '}
           </Htag>
-          <Button appearance="primary" className="crypto__add-portfolio">
+          <Button appearance="primary" className="crypto__add-portfolio" onClick={() => setIsModalOpen(true)}>
             <FaPlus /> ADD
           </Button>
         </div>
@@ -52,6 +53,14 @@ const CryptoPage = () => {
         </div>
 
         {coinData?.data && <CryptoDetails {...coinData.data} />}
+        {isModalOpen && (
+          <Modal
+            openId={id || ''}
+            data={coinData?.data}
+            isOpen={isModalOpen}
+            handleClose={() => setIsModalOpen(false)}
+          />
+        )}
       </Card>
     </div>
   );
