@@ -5,16 +5,13 @@ import { days } from '../../common/data';
 import { Button, Card, Chart, CryptoDetails, Htag, Ptag } from '../../components';
 import { useGetCryptoHistoryQuery, useGetCryptoQuery } from '../../features/crypto/cryptoApiSlice';
 
-import './Coin.scss';
+import './CryptoPage.scss';
 
-const Coin = () => {
+const CryptoPage = () => {
   const { id } = useParams();
+  const [selectedDay, setSelectedDay] = useState<number>(7);
   const { data: cryptosData } = useGetCryptoHistoryQuery({ id: id || '', interval: 'd1' });
   const { data: coinData } = useGetCryptoQuery(id || '');
-
-  console.log(coinData);
-
-  const [selectedDay, setSelectedDay] = useState<number>(7);
 
   const currentData = useMemo(() => {
     return cryptosData?.data
@@ -25,18 +22,20 @@ const Coin = () => {
   }, [cryptosData, selectedDay]);
 
   return (
-    <div className="coin">
-      <Card className="coin__container">
-        <Htag tag="h1">{coinData?.data.name} </Htag>
-        <Ptag>
+    <div className="crypto">
+      <Card className="crypto__container">
+        <Htag tag="h1" className="crypto__title">
+          {coinData?.data.name}{' '}
+        </Htag>
+        <Ptag className="crypto__subtitle">
           {coinData?.data.name} live price in USD dollars. View value statistics, market cap and supply.
         </Ptag>
         <Chart data={currentData} />
-        <div className="coin__btns">
+        <div className="crypto__btns">
           {days.map((day) => (
             <Button
               appearance="primary"
-              className={cn('coin__btn', { coin__btn_active: selectedDay === day.day })}
+              className={cn('crypto__btn', { crypto__btn_active: selectedDay === day.day })}
               key={day.id}
               onClick={() => setSelectedDay(day.day)}>
               {day.day}d
@@ -50,4 +49,4 @@ const Coin = () => {
   );
 };
 
-export default Coin;
+export default CryptoPage;

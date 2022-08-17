@@ -1,4 +1,4 @@
-export { default as Coin } from './Coin/Coin';
+export { default as Crypto } from './CryptoPage/CryptoPage';
 export { default as Home } from './Home/Home';
 export { default as Login } from './Login/Login';
 export { default as Register } from './Register/Register';

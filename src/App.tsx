@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AuthLayout, Layout } from './components';
-import { Coin, Home, Login, Register, Revenue, Wallet } from './pages';
+import { Crypto, Home, Login, Register, Revenue, Wallet } from './pages';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="revenue" element={<Revenue />} />
         <Route path="wallet" element={<Wallet />} />
-        <Route path="crypto/:id" element={<Coin />} />
+        <Route path="crypto/:id" element={<Crypto />} />
       </Route>
       <Route path="/" element={<AuthLayout />}>
         <Route path="auth" element={<Login />} />

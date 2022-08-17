@@ -1,6 +1,17 @@
-.coin {
+.crypto {
   margin-top: 70px;
   padding: 30px 20px;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__subtitle {
+    max-width: 80%;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    text-align: center;
+  }
 
   &__container {
     display: flex;

@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header, Sidebar } from '..';
+import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
 import './Layout.scss';
 
 const Layout = () => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  useGetAllCryptosQuery();
 
   const handleMenu = () => {
     setOpenSidebar((prev) => !prev);
@@ -15,7 +17,6 @@ const Layout = () => {
       <main className="wrapper">
         <Header isOpen={openSidebar} handleMenu={handleMenu} />
         <Outlet />
-        {/* <Footer /> */}
       </main>
     </div>
   );
