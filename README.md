@@ -1,5 +1,11 @@
 # CoineX
 
+### [Site link]()
+
+<kbd>
+  <img align="right" alt="img" src="src/assets/bg.png"  />
+</kbd>
+
 ### 🛠 The tech stack is:
 
 - [React](https://reactjs.org/)
