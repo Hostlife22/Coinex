@@ -1,6 +1,6 @@
 # CoineX
 
-### [Site link]()
+### [Site link](https://iridescent-medovik-abeabb.netlify.app/)
 
 <kbd>
   <img align="right" alt="img" src="src/assets/bg.png"  />
