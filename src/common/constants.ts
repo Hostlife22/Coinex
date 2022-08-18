@@ -1,6 +1,4 @@
-export const BASE_URL: string = import.meta.env.PROD
-  ? import.meta.env.VITE_API_URL_DEV
-  : import.meta.env.VITE_API_URL_DEV;
+export const BASE_URL: string = import.meta.env.VITE_API_URL_PROD;
 
 export const BASE_URL_CRYPTO: string = import.meta.env.VITE_API_URL_CRYPTO;
 export const CRYPTOCURRENCY_URL: string = import.meta.env.VITE_API_SOKET;
@@ -21,11 +19,11 @@ export const MESSAGES = Object.freeze({
     error: 'Invalid email or password',
   },
   validation: {
-    name: 'Name must be at least 2 characters',
+    name: 'Field must be at least 2 characters',
     email: 'Please enter a valid email address',
     password: 'Password must be at least 8 characters',
     required: {
-      name: 'Name is required',
+      name: 'Field is required',
       email: 'Email is required',
       password: 'Password is required',
     },
@@ -37,6 +35,9 @@ export const API = Object.freeze({
     getUrl: () => 'signin',
   },
   user: {
-    getUrl: (id?: string) => `users${'/' + id || ''}`,
+    getUrl: (id?: string) => `users${id ? `/${id}` : ''}`,
+  },
+  statistics: {
+    getUrl: (id: string) => `users/${id}/statistics`,
   },
 });

@@ -22,9 +22,15 @@
     justify-content: center;
   }
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    margin: 0;
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
+  input[type='number'],
+  input[type="number"]:hover,
+  input[type="number"]:focus {
+    appearance: textfield;
     appearance: none;
   }
 
@@ -43,6 +49,16 @@
 
     &:nth-child(3) {
       background-color: rgb(50 167 226);
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_disabled {
+      pointer-events: none;
     }
   }
 }

@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Header, Sidebar } from '..';
-import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import './Layout.scss';
 
 const Layout = () => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
-  useGetAllCryptosQuery();
+  const matches = useMediaQuery('(max-width: 630px)');
+
+  useEffect(() => {
+    if (matches) {
+      setOpenSidebar(true);
+    }
+  }, [matches]);
 
   const handleMenu = () => {
-    setOpenSidebar((prev) => !prev);
+    if (!matches) {
+      setOpenSidebar((prev) => !prev);
+    }
   };
   return (
     <div className="app">
-      <Sidebar isOpen={openSidebar} handleMenu={handleMenu} />
+      <Sidebar isOpen={openSidebar} handleMenu={handleMenu} matches={matches} />
       <main className="wrapper">
         <Header isOpen={openSidebar} handleMenu={handleMenu} />
         <Outlet />

@@ -8,11 +8,14 @@ import { checkNewRegister } from '../../common/helpers';
 import { Button, Card, Checkbox, Htag, Input, Ptag, UserForm } from '../../components';
 import { useAuthMutation } from '../../features/auth/authApiSlice';
 import { setUser } from '../../features/auth/authSlice';
+import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
+import { initialState as statistics } from '../../features/statistic/statisticSlice';
 import { ILoginForm, LocationParams } from './Login.interface';
 import './Login.scss';
 
 const Login = () => {
   const [loginUser] = useAuthMutation();
+  const [setStatistic] = usePutStatisticMutation();
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -36,8 +39,7 @@ const Login = () => {
         navigate(from, { replace: true });
 
         if (newUserId) {
-          //   setStatistic({ userId: user.userId, statistic });
-          //   setSettings({ userId: user.userId, settings });
+          setStatistic({ userId: user.userId, statistics });
         }
       })
       .catch((err) => {

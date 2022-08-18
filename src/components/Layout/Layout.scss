@@ -8,3 +8,10 @@
   background-color: var(--bg-black-700);
   transition: all 0.5s ease;
 }
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    left: 200px;
+    width: calc(100% - 200px);
+  }
+}

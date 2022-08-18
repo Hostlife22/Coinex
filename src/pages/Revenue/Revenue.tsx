@@ -1,23 +1,73 @@
-import { useState } from 'react';
-import { Bar, BarChart, Cell, ResponsiveContainer } from 'recharts';
-import icon from '../../assets/user.png';
-
+import { format } from 'date-fns';
+import { useMemo, useState } from 'react';
 import { FaCartPlus } from 'react-icons/fa';
-import { dataChart, previousExpenses, todayExpenses } from '../../common/data';
-import { Card, Htag, Ptag } from '../../components';
+import { Bar, BarChart, Cell, ResponsiveContainer } from 'recharts';
+import { useAppSelector } from '../../app/hooks';
+import icon from '../../assets/user.png';
+import { dataChart } from '../../common/data';
+import { Card, Htag, Ptag, RevenueItem } from '../../components';
+import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
+import { selectStatistic } from '../../features/statistic/statisticSlice';
+import { IStatisticState } from '../../features/statistic/statisticSlice.interface';
+import { useAuth } from '../../hooks/useAuth';
 import './Revenue.scss';
 
 function Expenses() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [updateStatistic, { isLoading }] = usePutStatisticMutation();
+  const selectedStatistic = useAppSelector(selectStatistic);
+  const { user } = useAuth();
 
   const onMouseOver = (data: any, index: number) => setActiveIndex(index);
+
+  const amountPrice = useMemo(
+    () =>
+      selectedStatistic.currency.reduce((acc, curr) => {
+        return acc + +curr.priceUsd * curr.amount;
+      }, 0),
+    [selectedStatistic.currency],
+  );
+
+  const soldPrice = useMemo(
+    () =>
+      selectedStatistic.history.sales.reduce((acc, curr) => {
+        return acc + +curr.priceUsd * curr.amount;
+      }, 0),
+    [selectedStatistic.currency],
+  );
+
+  const handleDelete = (id: string, deposit: number) => {
+    const newCurrency = selectedStatistic.currency.filter((item) => item.uid !== id);
+    const soldCurrency = selectedStatistic.currency.find((item) => item.uid === id);
+
+    console.log(deposit);
+
+    const newData: IStatisticState = {
+      transaction: {
+        ...selectedStatistic.transaction,
+        total: +selectedStatistic.transaction.total + deposit,
+      },
+      history: {
+        ...selectedStatistic.history,
+        sales: soldCurrency
+          ? [...selectedStatistic.history.sales, soldCurrency]
+          : selectedStatistic.history.sales,
+      },
+      currency: newCurrency,
+    };
+
+    updateStatistic({
+      userId: user.user.userId || '',
+      statistics: newData,
+    });
+  };
 
   return (
     <div className="revenue">
       <Card className="revenue__container">
         <div className={'revenue__overview'}>
           <Htag tag="h2" className="revenue__date-range">
-            01 - 18 August, 2022
+            01 - {format(new Date(), 'dd MMMM yyyy')}
           </Htag>
           <ResponsiveContainer width="100%" className={'revenue__chart'}>
             <BarChart data={dataChart}>
@@ -33,30 +83,20 @@ function Expenses() {
             </BarChart>
           </ResponsiveContainer>
 
-          <ul>
-            {todayExpenses.map((expense) => (
-              <li className={'revenue__item'} key={expense.id}>
-                <div className={'revenue__item-left'}>
-                  <div
-                    style={{ backgroundColor: expense.iconBackgroundColor }}
-                    className={'revenue__item-div'}>
-                    <img src={icon} alt={expense.expense} />
-                  </div>
-                  <div className={'revenue__item-details'}>
-                    <Ptag className={'revenue__item-title'}>{expense.expense}</Ptag>
-                    <Ptag className="revenue__item-time">
-                      {expense.time} • {expense.location}
-                    </Ptag>
-                  </div>
-                </div>
-                <p className={'revenue__item-price'}>{expense.price.toFixed(2)}</p>
-              </li>
-            ))}
+          <Htag tag="h1" className="home__title">
+            Crypto Spreadsheet
+          </Htag>
+
+          <ul className="revenue__list">
+            {selectedStatistic &&
+              selectedStatistic.currency.map((item, id) => (
+                <RevenueItem handleDelete={handleDelete} {...item} key={id} />
+              ))}
           </ul>
 
           <div className={'revenue__overview-header'}>
             <Htag tag="h3" className={'revenue__overview-title'}>
-              Monday, 18 August 2022
+              {format(new Date(), 'dd MMMM yyyy')}
             </Htag>
             <button>
               <img className={'revenue__option'} src={icon} alt="options" />
@@ -64,24 +104,30 @@ function Expenses() {
           </div>
 
           <ul>
-            {previousExpenses.map((expense) => (
-              <li className={'revenue__item'} key={expense.id}>
-                <div className={'revenue__item-left'}>
-                  <div
-                    style={{ backgroundColor: expense.iconBackgroundColor }}
-                    className={'revenue__item-div'}>
-                    <FaCartPlus />
-                  </div>
-                  <div className={'revenue__item-details'}>
-                    <Ptag className={'revenue__item-title'}>{expense.expense}</Ptag>
-                    <Ptag className={'revenue__item-time'}>
-                      {expense.time} • {expense.location}
-                    </Ptag>
-                  </div>
+            <li className={'revenue__item'}>
+              <div className={'revenue__item-left'}>
+                <div style={{ backgroundColor: '#DC3434' }} className={'revenue__item-div'}>
+                  <FaCartPlus />
                 </div>
-                <Ptag className={'revenue__item-price'}>{expense.price.toFixed(2)}</Ptag>
-              </li>
-            ))}
+                <div className={'revenue__item-details'}>
+                  <Ptag className={'revenue__item-title'}>Sales</Ptag>
+                  <Ptag className={'revenue__item-time'}>Sold for the amount</Ptag>
+                </div>
+              </div>
+              <Ptag className={'revenue__item-price'}>${soldPrice.toFixed(2)}</Ptag>
+            </li>
+            <li className={'revenue__item'}>
+              <div className={'revenue__item-left'}>
+                <div style={{ backgroundColor: '#4BA83D' }} className={'revenue__item-div'}>
+                  <FaCartPlus />
+                </div>
+                <div className={'revenue__item-details'}>
+                  <Ptag className={'revenue__item-title'}>Purchase</Ptag>
+                  <Ptag className={'revenue__item-time'}>Purchased cryptocurrencies</Ptag>
+                </div>
+              </div>
+              <Ptag className={'revenue__item-price'}>${amountPrice.toFixed(2)}</Ptag>
+            </li>
           </ul>
         </div>
       </Card>

@@ -56,3 +56,23 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .crypto {
+    padding: 20px;
+
+    &__add-portfolio {
+      padding: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .crypto {
+    padding: 15px;
+
+    &__container {
+      display: 15px;
+    }
+  }
+}

@@ -1,20 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app';
-import { IPersonStatistic } from './statisticApiSlice.interface';
+import { RootState } from '../../app/store';
+import { IGetStatistic } from './statisticApiSlice.interface';
 import { IStatisticState } from './statisticSlice.interface';
 
 export const initialState: IStatisticState = Object.freeze({
-  learnedWords: 0,
-  statistics: [],
+  transaction: {
+    deposit: 0,
+    withdraw: 0,
+    total: 0,
+  },
+  history: {
+    sales: [],
+    purchases: [],
+  },
+  currency: [],
 });
 
 export const statisticsSlice = createSlice({
   name: 'statistic',
   initialState,
   reducers: {
-    setStatistics: (state, action: PayloadAction<IPersonStatistic>) => {
-      state.learnedWords = action.payload.learnedWords;
-      state.statistics = action.payload.statistics;
+    setStatistics: (state, action: PayloadAction<IGetStatistic>) => {
+      const { transaction, history, currency } = action.payload.optional;
+      state.transaction = transaction;
+      state.history = history;
+      state.currency = currency;
     },
   },
 });

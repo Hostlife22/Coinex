@@ -25,3 +25,11 @@
     }
   }
 }
+
+@media screen and (max-width: 820px) {
+  .cryptodetails {
+    flex-direction: column;
+    gap: 30px;
+    align-items: initial;
+  }
+}

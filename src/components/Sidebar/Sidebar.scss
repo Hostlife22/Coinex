@@ -104,7 +104,7 @@
   }
 
   &.close {
-    width: 88px;
+    width: 80px;
 
     & .sidebar__search-box {
       background-color: var(--bg-black-700);
@@ -118,5 +118,32 @@
       left: 78px;
       width: calc(100% - 78px);
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    top: 68px;
+    width: 200px;
+
+    &__icon {
+      min-width: 45px;
+    }
+
+    &.close {
+      width: 70px;
+
+      & ~ .wrapper {
+        left: 70px;
+        width: calc(100% - 70px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .sidebar {
+    top: 55px;
+    transition: none;
   }
 }

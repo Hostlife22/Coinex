@@ -15,3 +15,31 @@
   font-size: 16px;
   line-height: 120%;
 }
+
+@media screen and (max-width: 1024px) {
+  .heading {
+    font-size: 35px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .heading {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+}

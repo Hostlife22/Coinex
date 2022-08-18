@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+import { IWallet, IWalletArgs } from '../pages/Wallet/Wallet.interface';
 import { LOCALSTORAGE_KEY_ID } from './constants';
 
 export function safeParse<T>(str: string): T | null {
@@ -52,3 +54,38 @@ export function incrementChar(number: number): string {
 
   return newNumber.toFixed(2);
 }
+
+export const getNewDeposit = ({ atribute, wallet, values }: IWalletArgs): [IWallet, boolean] => {
+  let newData = wallet;
+  let isChange = false;
+
+  if (atribute === 'deposit') {
+    if (values.deposit <= 0) {
+      toast.error("You can't deposit 0 or less");
+    } else {
+      newData = {
+        ...wallet,
+        deposit: wallet.deposit + values.deposit,
+        total: wallet.total + values.deposit,
+      };
+      isChange = true;
+    }
+  }
+
+  if (atribute === 'withdraw') {
+    if (values.withdraw === 0) {
+      toast.error("You don't have any balance to withdraw");
+    } else if (values.withdraw > wallet.total) {
+      toast.error("You don't have enough balance to withdraw");
+    } else {
+      newData = {
+        ...wallet,
+        withdraw: wallet.withdraw + values.withdraw,
+        total: wallet.total - values.withdraw,
+      };
+      isChange = true;
+    }
+  }
+
+  return [newData, isChange];
+};

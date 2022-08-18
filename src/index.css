@@ -133,6 +133,7 @@ textarea {
   display: none;
 }
 
+/*
 table {
   display: table;
 }
@@ -173,7 +174,7 @@ caption {
 
 th {
   font-weight: bolder;
-}
+} */
 
 ::-webkit-scrollbar {
   display: none;

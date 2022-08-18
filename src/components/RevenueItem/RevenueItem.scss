@@ -1,0 +1,43 @@
+.revenue__elem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px;
+
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  &-details {
+    margin-left: 15px;
+  }
+
+  &-title {
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  &-time {
+    opacity: 0.5;
+  }
+
+  &-price {
+    font-weight: 600;
+  }
+
+  &-btn {
+    color: #fff;
+    font-weight: 600;
+    background-color: rgb(220 52 52);
+  }
+}

@@ -1,9 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthLayout, Layout, ProtectedRoute } from './components';
+import { useGetStatisticQuery } from './features/statistic/statisticApiSlice';
+import { useAuth } from './hooks/useAuth';
 import { Crypto, Home, Login, Register, Revenue, Wallet } from './pages';
 
 function App() {
+  const { user } = useAuth();
+  useGetStatisticQuery(user.user.userId || '');
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

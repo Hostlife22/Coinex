@@ -1,23 +1,20 @@
-import { apiSlice } from '../../app/api/apiSlice';
-import { API, safeParse } from '../../common';
-import {
-  IGetStatisticResponse,
-  IPersonStatistic,
-  IPutStatisticRequest,
-  IStatistic,
-} from './statisticApiSlice.interface';
-import { setStatistics } from './statisticSlice';
+import { userApi } from '../../app/api/userApi';
+import { API } from '../../common/constants';
+import { safeParse } from '../../common/helpers';
+import { IGetStatistic, IGetStatisticResponse, IPutStatisticRequest } from './statisticApiSlice.interface';
+import { initialState, setStatistics } from './statisticSlice';
+import { IStatisticState } from './statisticSlice.interface';
 
-const extStatisticRes = (response: IGetStatisticResponse): IPersonStatistic => {
+const extStatisticRes = (response: IGetStatisticResponse): IGetStatistic => {
   return {
-    learnedWords: response.learnedWords,
-    statistics: safeParse<IStatistic[]>(response.optional.statistics) || [],
+    id: response.id,
+    optional: safeParse<IStatisticState>(response.optional.statistics) || initialState,
   };
 };
 
-export const statisticApiSlice = apiSlice.injectEndpoints({
+export const statisticApiSlice = userApi.enhanceEndpoints({ addTagTypes: ['Statistic'] }).injectEndpoints({
   endpoints: (builder) => ({
-    getStatistic: builder.query<IPersonStatistic, string>({
+    getStatistic: builder.query<IGetStatistic, string>({
       query: (userId) => ({
         url: API.statistics.getUrl(userId),
       }),
@@ -25,19 +22,20 @@ export const statisticApiSlice = apiSlice.injectEndpoints({
       onQueryStarted: (arg: string, { dispatch, queryFulfilled }) => {
         queryFulfilled.then((response) => dispatch(setStatistics(response.data))).catch((e) => {});
       },
+      providesTags: ['Statistic'],
     }),
-    putStatistic: builder.mutation<IPersonStatistic, IPutStatisticRequest>({
-      query: ({ userId, statistic: { learnedWords, statistics } }) => ({
+    putStatistic: builder.mutation<IGetStatistic, IPutStatisticRequest>({
+      query: ({ userId, statistics }) => ({
         url: API.statistics.getUrl(userId),
         method: 'PUT',
         body: {
-          learnedWords,
           optional: {
             statistics: JSON.stringify(statistics),
           },
         },
       }),
       transformResponse: extStatisticRes,
+      invalidatesTags: ['Statistic'],
     }),
   }),
 });

@@ -4,19 +4,23 @@ import { useEffect, useMemo, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button, Pagination } from '..';
+import { useAppSelector } from '../../app/hooks';
 import { CRYPTOCURRENCY_URL, PAGE_SIZE } from '../../common/constants';
 import { comparePrice, formatAsCurrency, formatAsPercent } from '../../common/helpers';
 import { ICoin } from '../../features/crypto/crypto.interface';
 import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
+import { selectSearchQuery } from '../../features/settings/settingsSlice';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import './Currency.scss';
 
 function Currency() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [assetsList, setAssetsList] = useState<ICoin[]>([]);
   const [change, setChange] = useState<{ [key: string]: string } | null>(null);
-  const { data } = useGetAllCryptosQuery();
+  const { data, isLoading } = useGetAllCryptosQuery();
   const navigation = useNavigate();
-
+  const searchQuery = useAppSelector(selectSearchQuery);
+  const matches = useMediaQuery('(max-width: 820px)');
   const changedId = new Map();
 
   useEffect(() => {
@@ -77,6 +81,9 @@ function Currency() {
     const lastPageIndex = firstPageIndex + PAGE_SIZE;
     return [...assetsList]
       .sort((a, b) => +b.changePercent24Hr - +a.changePercent24Hr)
+      .filter(({ name, id, supply }) =>
+        [name, id, supply].some((each) => each.toLowerCase().includes(searchQuery.toLowerCase())),
+      )
       .slice(firstPageIndex, lastPageIndex);
   }, [currentPage, data, changedId]);
 
@@ -84,21 +91,25 @@ function Currency() {
     <div className="cryptocurrency">
       <table className="cryptocurrency__table">
         <thead>
-          <tr>
+          <tr className="cryptocurrency__titles">
             <th>Name</th>
             <th>Price</th>
-            <th>Market Cap</th>
-            <th>Volume (24hr)</th>
+            {!matches && (
+              <>
+                <th>Market Cap</th>
+                <th>Volume (24hr)</th>
+              </>
+            )}
             <th>Change(24hr)</th>
             <th>Price Trend</th>
           </tr>
         </thead>
         <tbody>
-          {currentTableData.map((cryptocurrency) => {
+          {currentTableData.map((cryptocurrency, i) => {
             return (
               <tr
                 key={cryptocurrency.id}
-                className={cn({
+                className={cn(`cryptocurrency__tr-${i + 1}`, {
                   cryptocurrency__up: change?.[cryptocurrency.id] === 'priceDrop',
                   cryptocurrency__down: change?.[cryptocurrency.id] === 'priceIncrease',
                 })}>
@@ -113,14 +124,19 @@ function Currency() {
                 <td>
                   <p className="cryptocurrency__name">{formatAsCurrency(+cryptocurrency.priceUsd)}</p>
                 </td>
-                <td>
-                  <p className="cryptocurrency__subtitle">
-                    {cryptocurrency.marketCapUsd ? millify(+cryptocurrency.marketCapUsd) : ''}
-                  </p>
-                </td>
-                <td>
-                  <p className="cryptocurrency__subtitle">{millify(+cryptocurrency.volumeUsd24Hr)}</p>
-                </td>
+                {!matches && (
+                  <>
+                    <td>
+                      <p className="cryptocurrency__subtitle">
+                        {cryptocurrency.marketCapUsd ? millify(+cryptocurrency.marketCapUsd) : ''}
+                      </p>
+                    </td>
+                    <td>
+                      <p className="cryptocurrency__subtitle">{millify(+cryptocurrency.volumeUsd24Hr)}</p>
+                    </td>
+                  </>
+                )}
+
                 <td>
                   <p
                     className={cn('cryptocurrency__subtitle', {
@@ -144,13 +160,15 @@ function Currency() {
           })}
         </tbody>
       </table>
-      <Pagination
-        className="cryptocurrency__pagination"
-        currentPage={currentPage}
-        total={data?.data.length || 0}
-        pageSize={PAGE_SIZE}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+      {!isLoading && currentTableData.length > 5 && (
+        <Pagination
+          className="cryptocurrency__pagination"
+          currentPage={currentPage}
+          total={data?.data.length || 0}
+          pageSize={PAGE_SIZE}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 }
