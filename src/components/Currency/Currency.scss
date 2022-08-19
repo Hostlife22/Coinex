@@ -1,14 +1,19 @@
 .cryptocurrency {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   align-items: center;
-  padding-bottom: 10px;
+
+  &__input {
+    display: none !important;
+    margin-bottom: 30px;
+  }
 
   &__table {
+    width: 100%;
     border: none;
     border-radius: 4px;
     border-collapse: collapse;
-		width: 100%;
   }
 
   th {
@@ -78,17 +83,37 @@
     }
   }
 
+  &__no-results {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 50%;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      mix-blend-mode: color-burn;
+    }
+  }
+
   &__down {
     background-color: #ff00244d;
   }
 }
 
+@media screen and (max-width: 630px) {
+  .cryptocurrency {
+    &__input {
+      display: flex !important;
+      margin-bottom: 0;
+      padding: 0 10px;
+    }
+  }
+}
+
 @media screen and (max-width: 520px) {
   .cryptocurrency {
-    padding-bottom: 0;
-
-
-
     th {
       padding: 0 5px;
 
@@ -97,9 +122,13 @@
       }
     }
 
+    &__input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
     &__name {
-      // display: none;
-			max-width: 80px;
+      max-width: 80px;
     }
   }
 }
