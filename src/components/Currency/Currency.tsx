@@ -65,6 +65,7 @@ function Currency() {
 
   const setIndicator = (id: string, comparedPrice: number) => {
     const value = comparedPrice === 1 ? 'priceDrop' : 'priceUp';
+
     setChange((prev) => (prev ? { ...prev, [id]: value } : { [id]: value }));
 
     setTimeout(() => {
@@ -130,7 +131,7 @@ function Currency() {
                   key={cryptocurrency.id}
                   className={cn(`cryptocurrency__tr-${i + 1}`, {
                     cryptocurrency__up: change?.[cryptocurrency.id] === 'priceDrop',
-                    cryptocurrency__down: change?.[cryptocurrency.id] === 'priceIncrease',
+                    cryptocurrency__down: change?.[cryptocurrency.id] === 'priceUp',
                   })}>
                   <td>
                     <div className={'cryptocurrency__wrapper'}>

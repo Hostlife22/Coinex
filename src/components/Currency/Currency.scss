@@ -41,11 +41,11 @@
     white-space: nowrap;
 
     &_red {
-      color: rgb(243 102 102);
+      color: #f36666;
     }
 
     &_green {
-      color: rgb(102 243 102);
+      color: #66f366;
     }
   }
 
@@ -62,12 +62,16 @@
     transition: background-color 0.4s ease;
 
     &:hover {
-      background-color: rgb(0 0 0/ 15%);
+      background-color: #00000026;
     }
   }
 
   &__up {
-    background-color: #53d06263;
+    background-color: #54d16361;
+  }
+
+  &__down {
+    background-color: #f6483c61;
   }
 
   &__no-data {
@@ -95,10 +99,6 @@
       object-fit: contain;
       mix-blend-mode: color-burn;
     }
-  }
-
-  &__down {
-    background-color: #ff00244d;
   }
 }
 
