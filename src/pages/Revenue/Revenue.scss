@@ -91,6 +91,11 @@
       font-weight: 600;
     }
   }
+
+  &__pagination {
+    justify-content: center;
+    margin: 20px 0;
+  }
 }
 
 @media screen and (max-width: 520px) {

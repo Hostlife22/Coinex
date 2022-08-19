@@ -7,6 +7,7 @@ export const LOCALSTORAGE_KEY_USER = 'user';
 export const LOCALSTORAGE_KEY_TOKENS = 'tokens';
 export const LOCALSTORAGE_KEY_ID = 'newAccount';
 export const PAGE_SIZE = 10;
+export const PAGE_SIZE_SM = 3;
 export const DOTS = '...';
 
 export const MESSAGES = Object.freeze({

@@ -4,15 +4,17 @@ import { FaCartPlus } from 'react-icons/fa';
 import { Bar, BarChart, Cell, ResponsiveContainer } from 'recharts';
 import { useAppSelector } from '../../app/hooks';
 import icon from '../../assets/user.png';
+import { PAGE_SIZE_SM } from '../../common/constants';
 import { dataChart } from '../../common/data';
-import { Card, Diveder, Htag, Ptag, RevenueItem } from '../../components';
+import { Card, Diveder, Htag, Pagination, Ptag, RevenueItem } from '../../components';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
 import { IStatisticState } from '../../features/statistic/statisticSlice.interface';
 import { useAuth } from '../../hooks/useAuth';
 import './Revenue.scss';
 
-function Expenses() {
+function Revenue() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [activeIndex, setActiveIndex] = useState(0);
   const [updateStatistic, { isLoading }] = usePutStatisticMutation();
   const selectedStatistic = useAppSelector(selectStatistic);
@@ -36,11 +38,15 @@ function Expenses() {
     [selectedStatistic.currency],
   );
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PAGE_SIZE_SM;
+    const lastPageIndex = firstPageIndex + PAGE_SIZE_SM;
+    return [...selectedStatistic.currency].slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, selectedStatistic.currency]);
+
   const handleDelete = (id: string, deposit: number, price: string) => {
     const newCurrency = selectedStatistic.currency.filter((item) => item.uid !== id);
     const soldCurrency = selectedStatistic.currency.find((item) => item.uid === id);
-
-    console.log(soldPrice, deposit, soldPrice + deposit);
 
     const newData: IStatisticState = {
       transaction: {
@@ -88,11 +94,18 @@ function Expenses() {
           </Htag>
 
           <ul className="revenue__list">
-            {selectedStatistic &&
-              selectedStatistic.currency.map((item, id) => (
-                <RevenueItem handleDelete={handleDelete} {...item} key={id} />
-              ))}
+            {currentTableData.map((item, id) => (
+              <RevenueItem handleDelete={handleDelete} {...item} key={id} />
+            ))}
           </ul>
+
+          <Pagination
+            className="revenue__pagination"
+            currentPage={currentPage}
+            total={selectedStatistic?.currency.length || 0}
+            pageSize={3}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
 
           <div className={'revenue__overview-header'}>
             <Htag tag="h3" className={'revenue__overview-title'}>
@@ -137,4 +150,4 @@ function Expenses() {
   );
 }
 
-export default Expenses;
+export default Revenue;
