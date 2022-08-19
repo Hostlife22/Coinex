@@ -56,6 +56,9 @@ const Wallet = () => {
   return (
     <div className="wallet">
       <Card className="wallet__container">
+        <Htag className="wallet__title" tag="h1">
+          Wallet
+        </Htag>
         <div className="wallet__wrapper">
           <Card className="wallet__card">
             <Htag tag="h2">Deposit</Htag>

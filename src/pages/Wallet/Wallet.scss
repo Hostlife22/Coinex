@@ -1,18 +1,22 @@
 .wallet {
   display: flex;
   flex-direction: column;
-  gap: 30px;
   align-items: center;
-  justify-content: center;
+  min-height: calc(100vh - 70px);
   margin-top: 70px;
-  padding: 30px 20px;
+  padding: 20px;
+
+  &__title {
+    text-align: center;
+  }
 
   &__container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 20px;
-    justify-content: center;
-    max-width: 700px;
+    align-items: center;
+    width: 100%;
     padding: 20px;
   }
 
@@ -59,6 +63,33 @@
 
     &_disabled {
       pointer-events: none;
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .wallet {
+    margin-top: 60px;
+    padding: 0;
+
+    &__container {
+      align-items: baseline;
+      padding: 20px 10px;
+    }
+
+    &__wrapper {
+      flex-wrap: wrap;
+      gap: 10px;
+      width: 100%;
+    }
+
+    &__card {
+      max-width: initial;
+      padding: 10px;
+    }
+
+    &__form {
+      width: 100%;
     }
   }
 }
