@@ -8,6 +8,7 @@
     border: none;
     border-radius: 4px;
     border-collapse: collapse;
+		width: 100%;
   }
 
   th {
@@ -79,5 +80,26 @@
 
   &__down {
     background-color: #ff00244d;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .cryptocurrency {
+    padding-bottom: 0;
+
+
+
+    th {
+      padding: 0 5px;
+
+      >span {
+        display: none;
+      }
+    }
+
+    &__name {
+      // display: none;
+			max-width: 80px;
+    }
   }
 }

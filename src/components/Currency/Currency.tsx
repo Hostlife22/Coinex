@@ -97,11 +97,17 @@ function Currency() {
             {!matches && (
               <>
                 <th>Market Cap</th>
-                <th>Volume (24hr)</th>
+                <th>
+                  Volume <span>(24hr)</span>
+                </th>
               </>
             )}
-            <th>Change(24hr)</th>
-            <th>Price Trend</th>
+            <th>
+              Change<span>(24hr)</span>
+            </th>
+            <th>
+              <span>Price </span>Trend
+            </th>
           </tr>
         </thead>
         <tbody>
