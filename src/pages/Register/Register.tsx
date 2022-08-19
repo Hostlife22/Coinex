@@ -17,7 +17,6 @@ const Register = () => {
 
   const navigate = useNavigate();
   const location = useLocation() as LocationParams;
-  const from = location.state?.from?.pathname || '/';
 
   const {
     formState: { errors },
@@ -58,97 +57,94 @@ const Register = () => {
       </Ptag>
       <UserForm className="registration__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="registration__wrapper">
-          <div className="registration__inputs">
-            <Input
-              {...register('firstName', {
-                required: { value: true, message: MESSAGES.validation.required.name },
-                minLength: {
-                  value: 2,
-                  message: MESSAGES.validation.name,
-                },
-              })}
-              className="registration__input"
-              label="first name"
-              error={errors.firstName}
-              aria-invalid={errors.firstName ? 'true' : 'false'}
-            />
+          <Input
+            {...register('firstName', {
+              required: { value: true, message: MESSAGES.validation.required.name },
+              minLength: {
+                value: 2,
+                message: MESSAGES.validation.name,
+              },
+            })}
+            className="registration__input"
+            label="first name"
+            error={errors.firstName}
+            aria-invalid={errors.firstName ? 'true' : 'false'}
+          />
+          <Input
+            {...register('lastName', {
+              required: { value: true, message: MESSAGES.validation.required.name },
+              minLength: {
+                value: 2,
+                message: MESSAGES.validation.name,
+              },
+            })}
+            className="registration__input"
+            label="last name"
+            error={errors.lastName}
+            aria-invalid={errors.lastName ? 'true' : 'false'}
+          />
 
-            <Input
-              {...register('email', {
-                required: { value: true, message: MESSAGES.validation.required.email },
-                pattern: {
-                  value:
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: MESSAGES.validation.email,
-                },
-              })}
-              label="email"
-              error={errors.email}
-              className="registration__input"
-              aria-invalid={errors.email ? 'true' : 'false'}
-            />
-            <Input
-              {...register('password', {
-                required: { value: true, message: MESSAGES.validation.required.password },
-                minLength: {
-                  value: 8,
-                  message: MESSAGES.validation.password,
-                },
-              })}
-              autoComplete="on"
-              label="password"
-              type="password"
-              error={errors.password}
-              className="registration__input"
-              aria-invalid={errors.password ? 'true' : 'false'}
-            />
-          </div>
-          <div className="registration__inputs">
-            <Input
-              {...register('lastName', {
-                required: { value: true, message: MESSAGES.validation.required.name },
-                minLength: {
-                  value: 2,
-                  message: MESSAGES.validation.name,
-                },
-              })}
-              className="registration__input"
-              label="last name"
-              error={errors.lastName}
-              aria-invalid={errors.lastName ? 'true' : 'false'}
-            />
-            <Input
-              {...register('phone', {
-                required: { value: true, message: MESSAGES.validation.required.email },
-                pattern: {
-                  value:
-                    /^(\+{0,})(\d{0,})([(]{1}\d{1,3}[)]{0,}){0,}(\s?\d+|\+\d{2,3}\s{1}\d+|\d+){1}[\s|-]?\d+([\s|-]?\d+){1,2}(\s){0,}$/gm,
-                  message: MESSAGES.validation.email,
-                },
-              })}
-              label="phone no."
-              error={errors.phone}
-              className="registration__input"
-              aria-invalid={errors.phone ? 'true' : 'false'}
-            />
+          <Input
+            {...register('email', {
+              required: { value: true, message: MESSAGES.validation.required.email },
+              pattern: {
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: MESSAGES.validation.email,
+              },
+            })}
+            label="email"
+            error={errors.email}
+            className="registration__input"
+            aria-invalid={errors.email ? 'true' : 'false'}
+          />
+          <Input
+            {...register('phone', {
+              required: { value: true, message: MESSAGES.validation.required.email },
+              pattern: {
+                value:
+                  /^(\+{0,})(\d{0,})([(]{1}\d{1,3}[)]{0,}){0,}(\s?\d+|\+\d{2,3}\s{1}\d+|\d+){1}[\s|-]?\d+([\s|-]?\d+){1,2}(\s){0,}$/gm,
+                message: MESSAGES.validation.email,
+              },
+            })}
+            label="phone no."
+            error={errors.phone}
+            className="registration__input"
+            aria-invalid={errors.phone ? 'true' : 'false'}
+          />
 
-            <Input
-              {...register('confirmPassword', {
-                required: { value: true, message: MESSAGES.validation.required.password },
-                validate: (value) => value === watch('password') || 'The passwords do not match',
-              })}
-              autoComplete="on"
-              label="confirm password"
-              type="password"
-              error={errors.confirmPassword}
-              className="registration__input"
-              aria-invalid={errors.confirmPassword ? 'true' : 'false'}
-            />
-          </div>
+          <Input
+            {...register('password', {
+              required: { value: true, message: MESSAGES.validation.required.password },
+              minLength: {
+                value: 8,
+                message: MESSAGES.validation.password,
+              },
+            })}
+            autoComplete="on"
+            label="password"
+            type="password"
+            error={errors.password}
+            className="registration__input"
+            aria-invalid={errors.password ? 'true' : 'false'}
+          />
+
+          <Input
+            {...register('confirmPassword', {
+              required: { value: true, message: MESSAGES.validation.required.password },
+              validate: (value) => value === watch('password') || 'The passwords do not match',
+            })}
+            autoComplete="on"
+            label="confirm password"
+            type="password"
+            error={errors.confirmPassword}
+            className="registration__input"
+            aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+          />
         </div>
         <Checkbox
           className='className="registration__checkbox"'
-          label="I agree with the terms of use"
+          label="I agree with the terms"
           id="remember"
         />
         <Button className="registration__btn" appearance="primary" onClick={() => clearErrors()}>

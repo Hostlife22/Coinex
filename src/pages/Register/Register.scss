@@ -4,22 +4,18 @@
   gap: 16px;
   max-width: 560px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
   text-align: center;
 
   &__wrapper {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
+    justify-content: center;
   }
 
-  &__description:nth-of-type(1) {
-    text-align: left;
-  }
-
-  &__inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  &__input {
+    flex: 1 1 calc(100% / 3);
   }
 
   &__btn {
@@ -34,6 +30,27 @@
 
     &:hover {
       color: var(--color-primary-hover);
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .registration {
+    height: 100vh;
+    margin: 0;
+    padding: 15px;
+
+    &__wrapper {
+      flex-direction: column;
+    }
+
+    &__input {
+      flex: 1;
+    }
+
+    &__btn {
+      min-width: initial;
+      margin: 0;
     }
   }
 }
