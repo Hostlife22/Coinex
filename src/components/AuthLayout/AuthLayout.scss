@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,8 +9,24 @@
   background-color: var(--bg-black-700);
 }
 
+.home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 5px;
+  max-width: max-content;
+  color: var(--color-white) !important;
+  background-color: var(--bg-black-500) !important;
+}
+
 @media screen and (max-width: 520px) {
   .container {
     padding: 0;
+  }
+
+  .home-btn {
+    top: 10px;
+    left: 10px;
   }
 }
