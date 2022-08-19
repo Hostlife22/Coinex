@@ -26,3 +26,20 @@
     }
   }
 }
+
+@media screen and (max-width: 520px) {
+  .authorization {
+    justify-content: center;
+    height: 100vh;
+    padding: 15px;
+
+    &__description:nth-of-type(1) {
+      text-align: center;
+    }
+
+    &__btn {
+      min-width: initial;
+      margin: 0;
+    }
+  }
+}
