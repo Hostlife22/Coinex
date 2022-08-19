@@ -2,17 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: calc(100vh - 70px);
   margin-top: 70px;
-  padding: 30px 20px;
+  padding: 20px;
 
   &__container {
-    width: 85%;
+    width: 100%;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 20px;
   }
 
   &__overview {
@@ -94,29 +95,35 @@
 
 @media screen and (max-width: 520px) {
   .revenue {
-    padding: 15px;
+    margin-top: 60px;
+    padding: 0;
 
-    &__container {
-      display: 95%;
-    }
-
-    &__elem {
-      gap: 8px;
-      margin: 0;
+    &__overview {
+      padding: 10px;
+      padding-bottom: 90px;
     }
 
     &__item {
       flex-direction: column;
-      gap: 4px;
+      gap: 10px;
       text-align: center;
-    }
 
-    &__item-div {
-      display: none;
-    }
+      &-left {
+        flex-direction: column;
+        gap: 20px;
+      }
 
-    &__elem-div {
-      display: none;
+      &-details {
+        margin-left: 0;
+      }
+
+      &-time {
+        width: 100%;
+      }
+
+      &-price {
+        align-self: center;
+      }
     }
   }
 }

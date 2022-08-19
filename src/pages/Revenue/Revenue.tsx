@@ -5,7 +5,7 @@ import { Bar, BarChart, Cell, ResponsiveContainer } from 'recharts';
 import { useAppSelector } from '../../app/hooks';
 import icon from '../../assets/user.png';
 import { dataChart } from '../../common/data';
-import { Card, Htag, Ptag, RevenueItem } from '../../components';
+import { Card, Diveder, Htag, Ptag, RevenueItem } from '../../components';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
 import { IStatisticState } from '../../features/statistic/statisticSlice.interface';
@@ -36,21 +36,21 @@ function Expenses() {
     [selectedStatistic.currency],
   );
 
-  const handleDelete = (id: string, deposit: number) => {
+  const handleDelete = (id: string, deposit: number, price: string) => {
     const newCurrency = selectedStatistic.currency.filter((item) => item.uid !== id);
     const soldCurrency = selectedStatistic.currency.find((item) => item.uid === id);
 
-    console.log(deposit);
+    console.log(soldPrice, deposit, soldPrice + deposit);
 
     const newData: IStatisticState = {
       transaction: {
         ...selectedStatistic.transaction,
-        total: +selectedStatistic.transaction.total + deposit,
+        total: +soldPrice.toFixed(2) + +deposit.toFixed(2),
       },
       history: {
         ...selectedStatistic.history,
         sales: soldCurrency
-          ? [...selectedStatistic.history.sales, soldCurrency]
+          ? [...selectedStatistic.history.sales, { ...soldCurrency, priceUsd: price }]
           : selectedStatistic.history.sales,
       },
       currency: newCurrency,
@@ -116,6 +116,7 @@ function Expenses() {
               </div>
               <Ptag className={'revenue__item-price'}>${soldPrice.toFixed(2)}</Ptag>
             </li>
+            <Diveder className="revenue__elem-diveder" />
             <li className={'revenue__item'}>
               <div className={'revenue__item-left'}>
                 <div style={{ backgroundColor: '#4BA83D' }} className={'revenue__item-div'}>
@@ -126,6 +127,7 @@ function Expenses() {
                   <Ptag className={'revenue__item-time'}>Purchased cryptocurrencies</Ptag>
                 </div>
               </div>
+
               <Ptag className={'revenue__item-price'}>${amountPrice.toFixed(2)}</Ptag>
             </li>
           </ul>
