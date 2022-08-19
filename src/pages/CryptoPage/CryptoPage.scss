@@ -1,6 +1,9 @@
 .crypto {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
   margin-top: 70px;
-  padding: 30px 20px;
+  padding: 20px;
 
   &__wrapper {
     position: relative;
@@ -19,6 +22,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    padding: 5px;
     font-weight: 600;
   }
 
@@ -31,10 +35,10 @@
 
   &__container {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    padding: 20px 15px;
   }
 
   &__btns {
@@ -57,22 +61,18 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
-  .crypto {
-    padding: 20px;
-
-    &__add-portfolio {
-      padding: 5px;
-    }
-  }
-}
-
 @media screen and (max-width: 520px) {
   .crypto {
-    padding: 15px;
+    margin-top: 60px;
+    padding: 0;
 
     &__container {
       display: 15px;
+      padding-bottom: 70px;
+    }
+
+    &__subtitle {
+      max-width: initial;
     }
   }
 }
