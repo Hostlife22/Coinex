@@ -99,13 +99,15 @@ function Revenue() {
             ))}
           </ul>
 
-          <Pagination
-            className="revenue__pagination"
-            currentPage={currentPage}
-            total={selectedStatistic?.currency.length || 0}
-            pageSize={3}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
+          {selectedStatistic.currency.length > 3 && (
+            <Pagination
+              className="revenue__pagination"
+              currentPage={currentPage}
+              total={selectedStatistic?.currency.length || 0}
+              pageSize={3}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          )}
 
           <div className={'revenue__overview-header'}>
             <Htag tag="h3" className={'revenue__overview-title'}>
