@@ -67,3 +67,19 @@
     }
   }
 }
+
+@media screen and (max-width: 520px) {
+  .menu-list {
+    &__link li {
+      margin-top: 0;
+
+      > span {
+        min-width: auto;
+      }
+    }
+
+    &__title {
+      display: none;
+    }
+  }
+}

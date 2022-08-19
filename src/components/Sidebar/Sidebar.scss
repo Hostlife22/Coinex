@@ -131,11 +131,11 @@
     }
 
     &.close {
-      width: 70px;
+      width: 73px;
 
       & ~ .wrapper {
-        left: 70px;
-        width: calc(100% - 70px);
+        left: 73px;
+        width: calc(100% - 73px);
       }
     }
   }
@@ -143,7 +143,43 @@
 
 @media screen and (max-width: 520px) {
   .sidebar {
-    top: 55px;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
     transition: none;
+
+    &.close {
+      width: auto;
+
+      & ~ .wrapper {
+        left: 0;
+        width: 100%;
+        transition: none;
+      }
+    }
+
+    &__menu {
+      flex: 1;
+      margin-top: 0;
+    }
+
+    &__menu-list {
+      display: flex;
+      justify-content: space-evenly;
+
+      li {
+        height: 25px;
+        padding: 14px;
+      }
+    }
+
+    &__menu-bar {
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+    }
   }
 }
