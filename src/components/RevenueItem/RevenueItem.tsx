@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { FaSadTear, FaSpinner } from 'react-icons/fa';
 import { Button, Diveder } from '..';
 import avatar from '../../assets/user.png';
-import { formatAsPercent } from '../../common/helpers';
+import { formatAsPercent } from '../../common/helpers/formatAsPercent';
 import { useGetCryptoQuery } from '../../features/crypto/cryptoApiSlice';
 import Ptag from '../Ptag/Ptag';
 import { IRevenueItemProps } from './RevenueItem.interface';

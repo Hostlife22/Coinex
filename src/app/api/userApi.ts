@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { BASE_URL, LOCALSTORAGE_KEY_USER } from '../../common/constants';
 import { MethodsEnum } from '../../common/enums';
-import { safeParse } from '../../common/helpers';
+import { safeParse } from '../../common/helpers/safeParse';
 import { IAuthPayload, IAuthTokens } from '../../features/auth/auth.interface';
 import { logout, updateUserTokens } from '../../features/auth/authSlice';
 import { RootState } from '../store';

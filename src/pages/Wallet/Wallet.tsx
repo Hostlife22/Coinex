@@ -2,8 +2,9 @@ import cn from 'classnames';
 import millify from 'millify';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { toast } from 'react-toastify';
 import { useAppSelector } from '../../app/hooks';
-import { getNewDeposit } from '../../common/helpers';
+import { getNewDeposit } from '../../common/helpers/getNewDeposit';
 import { Button, Card, Htag, Input, UserForm } from '../../components';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
@@ -33,7 +34,7 @@ const Wallet = () => {
       withdraw: Number(withdrawRef.current?.value) || 0,
     };
 
-    const [data, isChanged] = getNewDeposit({ atribute, wallet, values });
+    const [data, isChanged] = getNewDeposit({ atribute, wallet, values, logger: toast.error });
 
     if (isChanged) {
       setWallet(data);

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { LOCALSTORAGE_KEY_USER } from '../common/constants';
-import { safeParse } from '../common/helpers';
+import { safeParse } from '../common/helpers/safeParse';
 import { IAuthPayload } from '../features/auth/auth.interface';
 import { selectAuth, setUser } from '../features/auth/authSlice';
 

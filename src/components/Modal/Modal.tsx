@@ -3,7 +3,7 @@ import { ChangeEvent, useMemo, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppSelector } from '../../app/hooks';
-import { incrementChar } from '../../common/helpers';
+import { incrementChar } from '../../common/helpers/incrementChar';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
 import { ICryptoStatistic, IStatisticState } from '../../features/statistic/statisticSlice.interface';

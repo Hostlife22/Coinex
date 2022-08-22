@@ -1,6 +1,6 @@
 import { userApi } from '../../app/api/userApi';
 import { API } from '../../common/constants';
-import { safeParse } from '../../common/helpers';
+import { safeParse } from '../../common/helpers/safeParse';
 import { IGetStatistic, IGetStatisticResponse, IPutStatisticRequest } from './statisticApiSlice.interface';
 import { initialState, setStatistics } from './statisticSlice';
 import { IStatisticState } from './statisticSlice.interface';

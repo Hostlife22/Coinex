@@ -3,12 +3,3 @@ export interface IWallet {
   withdraw: number;
   total: number;
 }
-
-export interface IWalletArgs {
-  atribute: string;
-  wallet: IWallet;
-  values: {
-    deposit: number;
-    withdraw: number;
-  };
-}

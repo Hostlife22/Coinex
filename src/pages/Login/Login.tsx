@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../app/hooks';
 import { MESSAGES } from '../../common/constants';
-import { checkNewRegister } from '../../common/helpers';
+import { checkNewRegister } from '../../common/helpers/safeParse';
 import { Button, Card, Checkbox, Htag, Input, Ptag, UserForm } from '../../components';
 import { useAuthMutation } from '../../features/auth/authApiSlice';
 import { setUser } from '../../features/auth/authSlice';

@@ -3,7 +3,7 @@ import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button, Diveder, Logo, Ptag, UserPanel } from '..';
 import { useAppDispatch } from '../../app/hooks';
-import { formatAsPercent } from '../../common/helpers';
+import { formatAsPercent } from '../../common/helpers/formatAsPercent';
 import { logout } from '../../features/auth/authSlice';
 import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
 import { useAuth } from '../../hooks/useAuth';

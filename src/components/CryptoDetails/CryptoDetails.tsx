@@ -8,7 +8,7 @@ import {
   AiOutlineThunderbolt,
   AiOutlineTrophy,
 } from 'react-icons/ai';
-import { formatAsPercent } from '../../common/helpers';
+import { formatAsPercent } from '../../common/helpers/formatAsPercent';
 import Htag from '../Htag/Htag';
 import Ptag from '../Ptag/Ptag';
 import { ICryptoDetailsProps } from './CryptoDetails.interface';
