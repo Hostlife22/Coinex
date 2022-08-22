@@ -1,7 +1,7 @@
-export const BASE_URL: string = import.meta.env.VITE_API_URL_PROD;
+export const BASE_URL = process.env.VITE_API_URL_PROD;
 
-export const BASE_URL_CRYPTO: string = import.meta.env.VITE_API_URL_CRYPTO;
-export const CRYPTOCURRENCY_URL: string = import.meta.env.VITE_API_SOKET;
+export const BASE_URL_CRYPTO = process.env.VITE_API_URL_CRYPTO;
+export const CRYPTOCURRENCY_URL = process.env.VITE_API_SOKET;
 
 export const LOCALSTORAGE_KEY_USER = 'user';
 export const LOCALSTORAGE_KEY_TOKENS = 'tokens';

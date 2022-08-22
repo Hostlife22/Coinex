@@ -3,7 +3,7 @@ import { ChangeEvent, useMemo, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppSelector } from '../../app/hooks';
-import { incrementChar } from '../../common/helpers/incrementChar';
+import { decPositiveLastNumber } from '../../common/helpers/decPositiveLastNumber';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
 import { ICryptoStatistic, IStatisticState } from '../../features/statistic/statisticSlice.interface';
@@ -30,7 +30,10 @@ const Modal = ({ handleClose, data, isOpen, openId }: IModalProps) => {
   const { user } = useAuth();
 
   const allowableAmount = selectedStatistic.transaction.total / Number(priceUsd);
-  const allowableAmountString = useMemo(() => incrementChar(+allowableAmount.toFixed(2)), [allowableAmount]);
+  const allowableAmountString = useMemo(
+    () => decPositiveLastNumber(+allowableAmount.toFixed(2)).toFixed(2),
+    [allowableAmount],
+  );
   const isAllowable = allowableAmount > 0;
   const message = isAllowable
     ? `You can buy: ${allowableAmount.toFixed(2)} ${symbol}`

@@ -1,9 +1,8 @@
 import { LOCALSTORAGE_KEY_ID } from '../constants';
-import { safeParse } from './safeParse';
 
-export const checkNewRegister = (): string | null => {
-  const userId = safeParse<string>(localStorage.getItem(LOCALSTORAGE_KEY_ID) || 'null');
+type CheckNewRegister = string | null;
 
+export const checkNewRegister = (userId: CheckNewRegister): CheckNewRegister => {
   if (userId) {
     localStorage.removeItem(LOCALSTORAGE_KEY_ID);
     return userId;
