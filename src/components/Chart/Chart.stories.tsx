@@ -13,9 +13,9 @@ export default {
 
 const Template: ComponentStory<typeof Chart> = (args) => <Chart {...args} />;
 
-export const Default = Template.bind({});
+export const AreaChart = Template.bind({});
 
-Default.args = {
+AreaChart.args = {
   data: Array(10)
     .fill(0)
     .map((each, index) => ({
