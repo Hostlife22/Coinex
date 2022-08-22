@@ -11,8 +11,17 @@
     margin: 0 auto;
   }
 
+  &__input {
+    width: 100%;
+  }
+
   &__description:nth-of-type(1) {
     text-align: left;
+  }
+
+  &__checkbox {
+    margin: 0 auto;
+    padding: 10px 0;
   }
 
   &__link {

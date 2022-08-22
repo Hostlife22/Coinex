@@ -90,7 +90,7 @@ const Login = () => {
           className="authorization__input"
           aria-invalid={errors.password ? 'true' : 'false'}
         />
-        <Checkbox className='className="authorization__checkbox"' label="Remember me?" id="remember" />
+        <Checkbox className="authorization__checkbox" label="Remember me?" id="remember" />
         <Button className="authorization__btn" appearance="primary" onClick={() => clearErrors()}>
           Sign In
         </Button>

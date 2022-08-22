@@ -142,11 +142,7 @@ const Register = () => {
             aria-invalid={errors.confirmPassword ? 'true' : 'false'}
           />
         </div>
-        <Checkbox
-          className='className="registration__checkbox"'
-          label="I agree with the terms"
-          id="remember"
-        />
+        <Checkbox className="registration__checkbox" label="I agree with the terms" id="remember" />
         <Button className="registration__btn" appearance="primary" onClick={() => clearErrors()}>
           Sign Up
         </Button>

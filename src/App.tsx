@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 import { AuthLayout, Layout, ProtectedRoute } from './components';
 import { useGetStatisticQuery } from './features/statistic/statisticApiSlice';
 import { useAuth } from './hooks/useAuth';
