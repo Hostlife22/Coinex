@@ -28,4 +28,28 @@ describe('card component', () => {
     expect(btn).toBeInTheDocument();
     expect(input).toBeInTheDocument();
   });
+
+  it('dinamyc style change works', () => {
+    render(<Card className="custom">dinamyc</Card>);
+
+    const card = screen.getByText(/dinamyc/i);
+
+    expect(card).toHaveClass('custom');
+    expect(card).toHaveClass('card');
+  });
+
+  it('card snapshot', () => {
+    const view = render(
+      <Card>
+        <div>
+          <form>
+            <input type="text" placeholder="value" />
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </Card>,
+    );
+
+    expect(view).toMatchSnapshot();
+  });
 });
