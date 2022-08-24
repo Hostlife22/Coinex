@@ -6,8 +6,8 @@ export const Ptag = ({ children, size, className, ...props }: PtagProps): JSX.El
   return (
     <p
       className={cn(className, {
-        ['small-text']: size === 's',
-        ['large-text']: size === 'l',
+        'small-text': size === 's',
+        'large-text': size === 'l',
       })}
       {...props}>
       {children}

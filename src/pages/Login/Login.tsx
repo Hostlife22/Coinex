@@ -34,15 +34,15 @@ const Login = () => {
   const loginUserHandler = useCallback(async (user: ILoginForm) => {
     await loginUser(user)
       .unwrap()
-      .then(({ message, ...user }) => {
+      .then(({ message, ...rest }) => {
         const userId = safeParse<string>(localStorage.getItem(LOCALSTORAGE_KEY_ID) || 'null');
         const newUserId = checkNewRegister(userId);
 
-        dispatch(setUser(user));
+        dispatch(setUser(rest));
         navigate(from, { replace: true });
 
         if (newUserId) {
-          setStatistic({ userId: user.userId, statistics });
+          setStatistic({ userId: rest.userId, statistics });
         }
       })
       .catch((err) => {

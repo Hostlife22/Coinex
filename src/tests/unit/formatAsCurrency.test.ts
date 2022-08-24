@@ -14,6 +14,6 @@ describe('formatAsCurrency', () => {
 
     const result = formatAsCurrency(num);
 
-    expect(result).toBe('$-100.50');
+    expect(result).toBe('-$100.50');
   });
 });

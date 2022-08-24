@@ -1,7 +1,7 @@
-export const BASE_URL = process.env.VITE_API_URL_PROD;
+export const BASE_URL = 'https://project-coinex.herokuapp.com/';
 
-export const BASE_URL_CRYPTO = process.env.VITE_API_URL_CRYPTO;
-export const CRYPTOCURRENCY_URL = process.env.VITE_API_SOKET;
+export const BASE_URL_CRYPTO = 'https://api.coincap.io/';
+export const CRYPTOCURRENCY_URL = 'wss://ws.coincap.io/prices?assets=ALL';
 
 export const LOCALSTORAGE_KEY_USER = 'user';
 export const LOCALSTORAGE_KEY_TOKENS = 'tokens';

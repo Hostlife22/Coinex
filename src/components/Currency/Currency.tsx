@@ -34,6 +34,23 @@ function Currency() {
     }
   }, [data]);
 
+  const setIndicator = (id: string, comparedPrice: number) => {
+    const value = comparedPrice === 1 ? 'priceDrop' : 'priceUp';
+
+    setChange((prev) => (prev ? { ...prev, [id]: value } : { [id]: value }));
+
+    setTimeout(() => {
+      setChange((prev) => {
+        if (prev) {
+          const { [id]: _, ...rest } = prev;
+          return rest;
+        }
+
+        return prev;
+      });
+    }, 1500);
+  };
+
   useEffect(() => {
     const clonedAsset = [...assetsList];
     const pricesWs = new WebSocket(CRYPTOCURRENCY_URL);
@@ -64,23 +81,6 @@ function Currency() {
       pricesWs.close();
     };
   }, [assetsList]);
-
-  const setIndicator = (id: string, comparedPrice: number) => {
-    const value = comparedPrice === 1 ? 'priceDrop' : 'priceUp';
-
-    setChange((prev) => (prev ? { ...prev, [id]: value } : { [id]: value }));
-
-    setTimeout(() => {
-      setChange((prev) => {
-        if (prev) {
-          const { [id]: _, ...rest } = prev;
-          return rest;
-        }
-
-        return prev;
-      });
-    }, 1500);
-  };
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PAGE_SIZE;

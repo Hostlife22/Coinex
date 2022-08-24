@@ -12,6 +12,18 @@ import {
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { IChartProps } from './Chart.interface';
 
+function CustomTooltip({ active, payload, label }: TooltipProps<ValueType, NameType>) {
+  if (active && payload && payload.length > 0) {
+    return (
+      <div className="tooltip">
+        <h4>{format(parseISO(label), 'eeee, d MMM, yyyy')}</h4>
+        <p>${payload[0]?.value ? Number(payload[0].value).toFixed(2) : '0.00'} USD</p>
+      </div>
+    );
+  }
+  return null;
+}
+
 const Chart = ({ data }: IChartProps) => {
   return (
     <ResponsiveContainer width="100%" height={250}>
@@ -62,17 +74,5 @@ const Chart = ({ data }: IChartProps) => {
     </ResponsiveContainer>
   );
 };
-
-function CustomTooltip({ active, payload, label }: TooltipProps<ValueType, NameType>) {
-  if (active && payload && payload.length > 0) {
-    return (
-      <div className="tooltip">
-        <h4>{format(parseISO(label), 'eeee, d MMM, yyyy')}</h4>
-        <p>${payload[0]?.value ? Number(payload[0].value).toFixed(2) : '0.00'} USD</p>
-      </div>
-    );
-  }
-  return null;
-}
 
 export default Chart;

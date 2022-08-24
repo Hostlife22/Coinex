@@ -24,9 +24,10 @@ const Modal = ({ handleClose, data, isOpen, openId }: IModalProps) => {
 
   const { priceUsd, symbol, id, name } = data;
 
-  const selectedStatistic = useAppSelector(selectStatistic);
-  const [updateStatistic, { isLoading }] = usePutStatisticMutation();
   const [amount, setAmount] = useState<string>('');
+  const selectedStatistic = useAppSelector(selectStatistic);
+
+  const [updateStatistic, { isLoading }] = usePutStatisticMutation();
   const { user } = useAuth();
 
   const allowableAmount = selectedStatistic.transaction.total / Number(priceUsd);

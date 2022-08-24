@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof Pagination> = (args) => {
   const [page, setPage] = useState<number>(1);
   const { currentPage, onPageChange, ...rest } = args;
 
-  return <Pagination currentPage={page} onPageChange={(page) => setPage(page)} {...rest} />;
+  return <Pagination currentPage={page} onPageChange={(pageNumber) => setPage(pageNumber)} {...rest} />;
 };
 
 export const PaginationPanel = Template.bind({});
