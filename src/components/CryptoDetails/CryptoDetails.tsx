@@ -29,47 +29,47 @@ const CryptoDetails = ({
     {
       title: 'Price to USD',
       value: `$ ${millify(Number(priceUsd))}`,
-      icon: <AiOutlineDollar />,
+      icon: <AiOutlineDollar data-testid="dollar" />,
     },
-    { title: 'Rank', value: rank, icon: <AiOutlineNumber /> },
+    { title: 'Rank', value: rank, icon: <AiOutlineNumber data-testid="number" /> },
     {
       title: '24h Volume',
       value: `$ ${millify(Number(volumeUsd24Hr))}`,
-      icon: <AiOutlineThunderbolt />,
+      icon: <AiOutlineThunderbolt data-testid="thunderbolt" />,
     },
     {
       title: 'Market Cap',
       value: `$ ${millify(Number(marketCapUsd))}`,
-      icon: <AiOutlineDollar />,
+      icon: <AiOutlineDollar data-testid="market" />,
     },
     {
       title: 'All-time-high(daily avg.)',
       value: `$ ${millify(Number(vwap24Hr))}`,
-      icon: <AiOutlineTrophy />,
+      icon: <AiOutlineTrophy data-testid="alltime" />,
     },
   ];
 
   const genericStats = [
-    { title: 'VWAP(24hr)', value: `$${millify(+vwap24Hr)}`, icon: <AiOutlineDollar /> },
+    { title: 'VWAP(24hr)', value: `$${millify(+vwap24Hr)}`, icon: <AiOutlineDollar data-testid="vwap" /> },
     {
       title: 'Change Percent(24hr) ',
       value: formatAsPercent(+changePercent24Hr),
-      icon: <AiOutlineFund />,
+      icon: <AiOutlineFund data-testid="fund" />,
     },
     {
       title: 'Aprroved Supply',
-      value: <AiOutlineCheckCircle />,
-      icon: <AiOutlineExclamationCircle />,
+      value: <AiOutlineCheckCircle data-testid="circle" />,
+      icon: <AiOutlineExclamationCircle data-testid="exclamation" />,
     },
     {
       title: 'Total Supply',
       value: `$ ${millify(Number(supply))}`,
-      icon: <AiOutlineExclamationCircle />,
+      icon: <AiOutlineExclamationCircle data-testid="total" />,
     },
     {
       title: 'Circulating Supply',
       value: maxSupply ? `$ ${millify(Number(maxSupply))}` : '-',
-      icon: <AiOutlineExclamationCircle />,
+      icon: <AiOutlineExclamationCircle data-testid="circulation" />,
     },
   ];
   return (

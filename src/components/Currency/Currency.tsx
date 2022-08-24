@@ -28,7 +28,6 @@ function Currency() {
   const changedId = new Map();
 
   useEffect(() => {
-    searchQuery;
     if (data?.data) {
       setAssetsList(data.data);
     }
