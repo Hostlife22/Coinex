@@ -1,17 +1,18 @@
+import { useQuery } from '@apollo/client';
 import cn from 'classnames';
 import millify from 'millify';
 import { useEffect, useMemo, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input, Pagination } from '..';
+import { GET_CRYPTOS } from '../../apollo/queries/cryptoQuery';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import empty from '../../assets/empty.gif';
 import { CRYPTOCURRENCY_URL, PAGE_SIZE } from '../../common/constants';
+import { ICoin, IGetCryptos } from '../../common/crypto.interface';
 import { comparePrice } from '../../common/helpers/comparePrice';
 import { formatAsCurrency } from '../../common/helpers/formatAsCurrency';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
-import { ICoin } from '../../features/crypto/crypto.interface';
-import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
 import { selectSearchQuery, setSearchCrypto } from '../../features/settings/settingsSlice';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import './Currency.scss';
@@ -20,18 +21,17 @@ function Currency() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [assetsList, setAssetsList] = useState<ICoin[]>([]);
   const [change, setChange] = useState<{ [key: string]: string } | null>(null);
-  const { data, isLoading } = useGetAllCryptosQuery();
+  const { loading, data } = useQuery<IGetCryptos>(GET_CRYPTOS);
   const navigation = useNavigate();
   const searchQuery = useAppSelector(selectSearchQuery);
   const matches = useMediaQuery('(max-width: 820px)');
   const dispatch = useAppDispatch();
-  const changedId = new Map();
 
   useEffect(() => {
-    if (data?.data) {
-      setAssetsList(data.data);
+    if (data?.assets) {
+      setAssetsList(data.assets);
     }
-  }, [data]);
+  }, [data?.assets]);
 
   const setIndicator = (id: string, comparedPrice: number) => {
     const value = comparedPrice === 1 ? 'priceDrop' : 'priceUp';
@@ -90,7 +90,7 @@ function Currency() {
         [name, id, supply].some((each) => each.toLowerCase().includes(searchQuery.toLowerCase())),
       )
       .slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, data, changedId]);
+  }, [currentPage, assetsList, searchQuery]);
 
   return (
     <div className="cryptocurrency">
@@ -102,7 +102,7 @@ function Currency() {
           dispatch(setSearchCrypto(e.target.value));
         }}
       />
-      {isLoading && <div>Loading...</div>}
+      {loading && <div>Loading...</div>}
       {currentTableData.length > 0 && (
         <table className="cryptocurrency__table">
           <thead>
@@ -187,11 +187,11 @@ function Currency() {
           <img src={empty} alt="empty" />
         </div>
       )}
-      {!isLoading && currentTableData.length > 5 && (
+      {!loading && currentTableData.length > 5 && (
         <Pagination
           className="cryptocurrency__pagination"
           currentPage={currentPage}
-          total={data?.data.length || 0}
+          total={data?.assets?.length || 0}
           pageSize={PAGE_SIZE}
           onPageChange={(page) => setCurrentPage(page)}
         />

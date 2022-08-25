@@ -1,9 +1,12 @@
+import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
 import { FaSadTear, FaSpinner } from 'react-icons/fa';
 import { Button, Diveder } from '..';
+import { GET_CRYPTO } from '../../apollo/queries/cryptoQuery';
+import { getCryptoVariables } from '../../apollo/queries/__generated__/getCrypto';
 import avatar from '../../assets/user.png';
+import { IGetCrypto } from '../../common/crypto.interface';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
-import { useGetCryptoQuery } from '../../features/crypto/cryptoApiSlice';
 import Ptag from '../Ptag/Ptag';
 import { IRevenueItemProps } from './RevenueItem.interface';
 import './RevenueItem.scss';
@@ -20,9 +23,11 @@ const RevenueItem = ({
   id,
 }: IRevenueItemProps) => {
   const price = +priceUsd * amount;
-  const { data, isLoading, isError, isSuccess } = useGetCryptoQuery(id);
+  const { data, loading, error } = useQuery<IGetCrypto, getCryptoVariables>(GET_CRYPTO, {
+    variables: { id: id || '' },
+  });
 
-  if (isLoading) {
+  if (loading) {
     return (
       <li className="revenue__elem-loading">
         Getting transaction data...
@@ -31,7 +36,7 @@ const RevenueItem = ({
     );
   }
 
-  if (isError) {
+  if (error) {
     return (
       <li className="revenue__elem-loading">
         something went wrong try again later{' '}
@@ -42,7 +47,7 @@ const RevenueItem = ({
     );
   }
 
-  const currentPrice = Number(data?.data.priceUsd || 0) * amount;
+  const currentPrice = Number(data?.asset.priceUsd || 0) * amount;
   const diffPercent = ((currentPrice - price) / price) * 100;
 
   return (
@@ -65,17 +70,17 @@ const RevenueItem = ({
             <li>
               <span>transaction:</span> {format(new Date(date), 'dd-MM-yyyy')}{' '}
             </li>
-            {isSuccess && (
+            {data?.asset && (
               <>
                 <Diveder className="revenue__elem-diveder" />
                 <li>
                   <span>percentage difference:</span> {formatAsPercent(diffPercent)}
                 </li>
                 <li>
-                  <span>sell for:</span> {Number(+data.data.priceUsd * amount).toFixed(2)} USD{' '}
+                  <span>sell for:</span> {Number(+data.asset.priceUsd * amount).toFixed(2)} USD{' '}
                 </li>
                 <li>
-                  <span>current price:</span> {Number(data.data.priceUsd).toFixed(4)} USD
+                  <span>current price:</span> {Number(data.asset.priceUsd).toFixed(4)} USD
                 </li>
               </>
             )}
@@ -85,7 +90,7 @@ const RevenueItem = ({
       <Button
         className={'revenue__elem-btn'}
         appearance="primary"
-        onClick={() => handleDelete(uid, currentPrice, data?.data.priceUsd || priceUsd)}>
+        onClick={() => handleDelete(uid, currentPrice, data?.asset.priceUsd || priceUsd)}>
         Sell
       </Button>
     </li>

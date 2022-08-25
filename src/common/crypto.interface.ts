@@ -13,28 +13,18 @@ export interface ICoin {
   vwap24Hr: string;
 }
 
-export interface ICryptosResponse {
-  data: ICoin[];
-  timestamp: number;
-}
-
 export interface ICryptoHistory {
-  date: Date;
   priceUsd: string;
   time: number;
 }
 
-export interface ICryptoHistoryRequest {
-  id: string;
-  interval?: string;
+export interface IGetCryptos {
+  assets: ICoin[];
+}
+export interface IGetCrypto {
+  asset: ICoin;
 }
 
-export interface ICryptoHistoryResponse {
-  data: ICryptoHistory[];
-  timestamp: number;
-}
-
-export interface ICryptocoinReaponse {
-  data: ICoin;
-  timestamp: number;
+export interface IGetCryptoHistory {
+  assetHistory: ICryptoHistory[];
 }

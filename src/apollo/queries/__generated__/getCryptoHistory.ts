@@ -3,14 +3,14 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { AssetHistoryInterval } from "./../../../../__generated__/globalTypes";
+import { AssetHistoryInterval } from '../../__generated__/globalTypes';
 
 // ====================================================
 // GraphQL query operation: getCryptoHistory
 // ====================================================
 
 export interface getCryptoHistory_assetHistory {
-  __typename: "AssetHistory";
+  __typename: 'AssetHistory';
   priceUsd: string | null;
   time: number | null;
 }

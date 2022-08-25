@@ -1,17 +1,20 @@
+import { useQuery } from '@apollo/client';
 import { useMemo } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button, Diveder, Logo, Ptag, UserPanel } from '..';
+import { GET_CRYPTOS } from '../../apollo/queries/cryptoQuery';
 import { useAppDispatch } from '../../app/hooks';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
 import { logout } from '../../features/auth/authSlice';
-import { useGetAllCryptosQuery } from '../../features/crypto/cryptoApiSlice';
+import { IGetCryptos } from '../../common/crypto.interface';
 import { useAuth } from '../../hooks/useAuth';
 import { IHeaderProps } from './Header.interface';
 import './Header.scss';
 
 const Header = ({ handleMenu, isOpen }: IHeaderProps) => {
-  const { data } = useGetAllCryptosQuery();
+  const { data } = useQuery<IGetCryptos>(GET_CRYPTOS);
+
   const { auth } = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -21,10 +24,10 @@ const Header = ({ handleMenu, isOpen }: IHeaderProps) => {
   };
 
   const currentTableData = useMemo(() => {
-    return data?.data
-      ? [...data.data].sort((a, b) => +b.changePercent24Hr - +a.changePercent24Hr).slice(0, 3)
+    return data?.assets
+      ? [...data.assets].sort((a, b) => +b.changePercent24Hr - +a.changePercent24Hr).slice(0, 3)
       : [];
-  }, [data?.data]);
+  }, [data?.assets]);
 
   return (
     <header className="header">

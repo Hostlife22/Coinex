@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import millify from 'millify';
+import { ICoin } from '../../common/crypto.interface';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
-import { ICoin } from '../../features/crypto/crypto.interface';
 import CryptoDetails from './CryptoDetails';
 
 const props: ICoin = {
