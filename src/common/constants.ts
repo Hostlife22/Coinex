@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://project-coinex.herokuapp.com/';
 
-export const BASE_URL_CRYPTO = 'https://api.coincap.io/';
+export const BASE_URL_CRYPTO = 'https://restapi-graphql.herokuapp.com/graphql';
 export const CRYPTOCURRENCY_URL = 'wss://ws.coincap.io/prices?assets=ALL';
 
 export const LOCALSTORAGE_KEY_USER = 'user';

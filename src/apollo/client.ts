@@ -1,7 +1,8 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { BASE_URL_CRYPTO } from '../common/constants';
 
 const client = new ApolloClient({
-  uri: 'https://restapi-graphql.herokuapp.com/graphql',
+  uri: BASE_URL_CRYPTO,
   cache: new InMemoryCache(),
 });
 
