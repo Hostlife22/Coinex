@@ -23,13 +23,13 @@ const UserPanel = ({ className, isLogin, logOut, ...props }: IUserPanelProps) =>
         </Htag>
         <Htag tag="h3" className="user__role">
           User
-          <FaCrown />
+          <FaCrown data-testid="crown" />
         </Htag>
       </div>
 
       {isLogin && (
         <div className="user__logout" onClick={logOut}>
-          <BiLogIn />
+          <BiLogIn data-testid="logout" />
         </div>
       )}
     </div>
