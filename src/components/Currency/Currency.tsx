@@ -58,10 +58,10 @@ function Currency() {
       const updatedAssets = clonedAsset.map((eachAsset) => {
         const parsedMessage = JSON.parse(msg.data) as { [key: string]: string };
         if (parsedMessage[eachAsset.id]) {
-          const compadredPrice = comparePrice(+eachAsset.priceUsd, +parsedMessage[eachAsset.id]);
+          const comparedPrice = comparePrice(+eachAsset.priceUsd, +parsedMessage[eachAsset.id]);
 
-          if (compadredPrice === 1 || compadredPrice === -1) {
-            setIndicator(eachAsset.id, compadredPrice);
+          if (comparedPrice === 1 || comparedPrice === -1) {
+            setIndicator(eachAsset.id, comparedPrice);
 
             return {
               ...eachAsset,
@@ -86,8 +86,8 @@ function Currency() {
     const lastPageIndex = firstPageIndex + PAGE_SIZE;
     return [...assetsList]
       .sort((a, b) => +b.changePercent24Hr - +a.changePercent24Hr)
-      .filter(({ name, id, supply }) =>
-        [name, id, supply].some((each) => each.toLowerCase().includes(searchQuery.toLowerCase())),
+      .filter(({ name, id, symbol }) =>
+        [name, id, symbol].some((each) => each.toLowerCase().includes(searchQuery.toLowerCase())),
       )
       .slice(firstPageIndex, lastPageIndex);
   }, [currentPage, assetsList, searchQuery]);
@@ -104,7 +104,7 @@ function Currency() {
       />
       {loading && <div>Loading...</div>}
       {currentTableData.length > 0 && (
-        <table className="cryptocurrency__table">
+        <table className="cryptocurrency__table" data-testid="table">
           <thead>
             <tr className="cryptocurrency__titles">
               <th>Name</th>
@@ -183,7 +183,7 @@ function Currency() {
         </table>
       )}
       {currentTableData.length === 0 && searchQuery && (
-        <div className="cryptocurrency__no-results">
+        <div className="cryptocurrency__no-results" data-testid="img-no-results">
           <img src={empty} alt="empty" />
         </div>
       )}

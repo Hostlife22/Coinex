@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, handleMenu, matches }: ISidebarProps) => {
 
   return (
     <>
-      <nav className={cn('sidebar', { close: isOpen })}>
+      <nav className={cn('sidebar', { close: isOpen })} data-testid="sidebar">
         <div className="sidebar__menu-bar">
           <div className="sidebar__menu">
             {!matches && (
@@ -32,7 +32,12 @@ const Sidebar = ({ isOpen, handleMenu, matches }: ISidebarProps) => {
                   <FaSearch />
                 </span>
 
-                <input placeholder="Search..." value={searchValue} onChange={onChange} />
+                <input
+                  placeholder="Search..."
+                  value={searchValue}
+                  onChange={onChange}
+                  data-testid="search-input"
+                />
               </li>
             )}
 

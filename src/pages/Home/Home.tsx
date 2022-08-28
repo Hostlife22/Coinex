@@ -3,7 +3,7 @@ import './Home.scss';
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="home" data-testid="home">
       <Card className="home__wrapper">
         <Htag tag="h1" className="home__title">
           Crypto Spreadsheet

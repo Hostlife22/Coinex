@@ -17,11 +17,13 @@ const Logo = ({ handleMenu, isOpen, className, ...props }: ILogoProps) => {
         </span>
 
         <div className="logo__text ">
-          <Ptag className="logo__name">oineX</Ptag>
+          <Ptag className="logo__name" data-testid="logo-title">
+            oineX
+          </Ptag>
         </div>
       </div>
 
-      {!matches && <FaArrowRight className="logo__btn-toggle" onClick={handleMenu} />}
+      {!matches && <FaArrowRight className="logo__btn-toggle" onClick={handleMenu} data-testid="toggle" />}
     </div>
   );
 };

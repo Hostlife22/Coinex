@@ -3,15 +3,17 @@
     "browser": true,
     "es2021": true
   },
+
   "extends": [
     "react-app",
     "react-app/jest",
     "airbnb-typescript",
     "plugin:import/typescript",
     "plugin:storybook/recommended",
-    "plugin:cypress/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
   ],
+
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -19,12 +21,12 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "cypress", "prettier"],
   "overrides": [
     {
-      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)", "'src/**/*.ts', 'src/**/*.tsx']"],
       "rules": {
         "storybook/hierarchy-separator": "error",
         "storybook/default-exports": "off"
@@ -80,5 +82,17 @@
         "semi": true
       }
     ]
-  }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      },
+      "typescript": {
+        "project": "tsconfig.eslint.json",
+        "extensions": [".ts"]
+      }
+    }
+  },
+  "root": true
 }

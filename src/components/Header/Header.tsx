@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Diveder, Logo, Ptag, UserPanel } from '..';
 import { GET_CRYPTOS } from '../../apollo/queries/cryptoQuery';
 import { useAppDispatch } from '../../app/hooks';
+import { IGetCryptos } from '../../common/crypto.interface';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
 import { logout } from '../../features/auth/authSlice';
-import { IGetCryptos } from '../../common/crypto.interface';
 import { useAuth } from '../../hooks/useAuth';
 import { IHeaderProps } from './Header.interface';
 import './Header.scss';
@@ -30,7 +30,7 @@ const Header = ({ handleMenu, isOpen }: IHeaderProps) => {
   }, [data?.assets]);
 
   return (
-    <header className="header">
+    <header className="header" data-testid="header">
       <div className="header__container">
         <Logo handleMenu={handleMenu} isOpen={isOpen} className="header__logo" />
         <div className="header__coines">
