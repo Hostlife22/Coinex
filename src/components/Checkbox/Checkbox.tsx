@@ -7,7 +7,7 @@ const Checkbox = forwardRef(
   ({ className, label, id, ...props }: ICheckboxProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
       <div className={cn(className, 'checkbox')} data-testid="checkbox">
-        <input type="checkbox" id={id} ref={ref} {...props} />
+        <input type="checkbox" id={id} ref={ref} {...props} data-testid="checkbox-input" />
         <label htmlFor={id}>
           <span></span>
           {label}

@@ -10,6 +10,7 @@ Object {
         data-testid="checkbox"
       >
         <input
+          data-testid="checkbox-input"
           type="checkbox"
         />
         <label>
@@ -25,6 +26,7 @@ Object {
       data-testid="checkbox"
     >
       <input
+        data-testid="checkbox-input"
         type="checkbox"
       />
       <label>

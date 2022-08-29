@@ -107,7 +107,7 @@ const Login = () => {
 
       <Ptag className="authorization__description" size="l">
         Don’t have an account?{' '}
-        <span className="authorization__link" onClick={() => navigate('/register')}>
+        <span className="authorization__link" data-testid="auth-link" onClick={() => navigate('/register')}>
           Click here to sign up.
         </span>
       </Ptag>

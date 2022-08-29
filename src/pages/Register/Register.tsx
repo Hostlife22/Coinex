@@ -48,7 +48,7 @@ const Register = () => {
   };
 
   return (
-    <Card className="registration">
+    <Card className="registration" data-testid="registration">
       <Htag className="registration__heading" tag="h1">
         Sign Up
       </Htag>
@@ -69,6 +69,7 @@ const Register = () => {
             label="first name"
             error={errors.firstName}
             aria-invalid={errors.firstName ? 'true' : 'false'}
+            data-testid="register-firstName"
           />
           <Input
             {...register('lastName', {
@@ -82,6 +83,7 @@ const Register = () => {
             label="last name"
             error={errors.lastName}
             aria-invalid={errors.lastName ? 'true' : 'false'}
+            data-testid="register-lastName"
           />
 
           <Input
@@ -97,6 +99,7 @@ const Register = () => {
             error={errors.email}
             className="registration__input"
             aria-invalid={errors.email ? 'true' : 'false'}
+            data-testid="register-email"
           />
           <Input
             {...register('phone', {
@@ -111,6 +114,7 @@ const Register = () => {
             error={errors.phone}
             className="registration__input"
             aria-invalid={errors.phone ? 'true' : 'false'}
+            data-testid="register-phone"
           />
 
           <Input
@@ -127,6 +131,7 @@ const Register = () => {
             error={errors.password}
             className="registration__input"
             aria-invalid={errors.password ? 'true' : 'false'}
+            data-testid="register-password"
           />
 
           <Input
@@ -140,16 +145,21 @@ const Register = () => {
             error={errors.confirmPassword}
             className="registration__input"
             aria-invalid={errors.confirmPassword ? 'true' : 'false'}
+            data-testid="register-confirmPassword"
           />
         </div>
         <Checkbox className="registration__checkbox" label="I agree with the terms" id="remember" />
-        <Button className="registration__btn" appearance="primary" onClick={() => clearErrors()}>
+        <Button
+          className="registration__btn"
+          appearance="primary"
+          onClick={() => clearErrors()}
+          data-testid="register-submit">
           Sign Up
         </Button>
       </UserForm>
       <Ptag className="registration__description" size="l">
         Already have an Account{' '}
-        <span className="registration__link" onClick={() => navigate('/auth')}>
+        <span className="registration__link" data-testid="register-link" onClick={() => navigate('/auth')}>
           Sign in
         </span>
       </Ptag>
