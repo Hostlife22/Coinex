@@ -63,27 +63,53 @@ const Wallet = () => {
         <div className="wallet__wrapper">
           <Card className="wallet__card">
             <Htag tag="h2">Deposit</Htag>
-            <Htag tag="h3">$ {millify(wallet.deposit)}</Htag>
+            <Htag tag="h3" data-testid="deposit-cart">
+              $ {millify(wallet.deposit)}
+            </Htag>
           </Card>
           <Card className="wallet__card">
             <Htag tag="h2">Withdraw</Htag>
-            <Htag tag="h3">$ {millify(wallet.withdraw)}</Htag>
+            <Htag tag="h3" data-testid="withdraw-cart">
+              $ {millify(wallet.withdraw)}
+            </Htag>
           </Card>
           <Card className="wallet__card">
             <Htag tag="h2">Balance</Htag>
-            <Htag tag="h3">$ {millify(wallet.total)}</Htag>
+            <Htag tag="h3" data-testid="balance-cart">
+              $ {millify(wallet.total)}
+            </Htag>
           </Card>
         </div>
 
-        <UserForm className="wallet__form" onSubmit={handleSubmit} id={'deposit'}>
-          <Input className="wallet__input" label="Deposit" name="deposit" type="number" ref={depositRef} />
-          <Button className={cn('wallet__btn', { wallet__btn_disabled: isLoading })} appearance="primary">
+        <UserForm className="wallet__form" onSubmit={handleSubmit} id={'deposit'} data-testid="deposit">
+          <Input
+            className="wallet__input"
+            label="Deposit"
+            name="deposit"
+            type="number"
+            ref={depositRef}
+            data-testid="input-deposit"
+          />
+          <Button
+            className={cn('wallet__btn', { wallet__btn_disabled: isLoading })}
+            appearance="primary"
+            data-testid="submit-deposit">
             {isLoading ? <ClipLoader size={16} /> : 'Deposit'}
           </Button>
         </UserForm>
-        <UserForm className="wallet__form" onSubmit={handleSubmit} id={'withdraw'}>
-          <Input className="wallet__input" label="Withdraw" name="withdraw" type="number" ref={withdrawRef} />
-          <Button className={cn('wallet__btn', { wallet__btn_disabled: isLoading })} appearance="primary">
+        <UserForm className="wallet__form" onSubmit={handleSubmit} id={'withdraw'} data-testid="withdraw">
+          <Input
+            className="wallet__input"
+            label="Withdraw"
+            name="withdraw"
+            type="number"
+            ref={withdrawRef}
+            data-testid="input-withdraw"
+          />
+          <Button
+            className={cn('wallet__btn', { wallet__btn_disabled: isLoading })}
+            appearance="primary"
+            data-testid="submit-withdraw">
             {isLoading ? <ClipLoader size={16} /> : 'Withdraw'}
           </Button>
         </UserForm>

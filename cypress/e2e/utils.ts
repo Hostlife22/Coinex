@@ -36,5 +36,23 @@ export function loginUser(email: string, password: string) {
       cy.get('[data-testid="auth-submit"]').click();
     });
 
-  cy.location('pathname').should('equal', '/');
+  // cy.location('pathname').should('equal', '/');
+}
+
+export function deposit(sum: number) {
+  cy.get('[data-testid="deposit"]')
+    .should('be.visible')
+    .within(() => {
+      cy.get('[data-testid="input-deposit"]').should('be.visible').type(String(sum));
+      cy.get('[data-testid="submit-deposit"]').should('exist').click();
+    });
+}
+
+export function withdraw(sum: number) {
+  cy.get('[data-testid="withdraw"]')
+    .should('be.visible')
+    .within(() => {
+      cy.get('[data-testid="input-withdraw"]').should('be.visible').type(String(sum));
+      cy.get('[data-testid="submit-withdraw"]').should('exist').click();
+    });
 }
