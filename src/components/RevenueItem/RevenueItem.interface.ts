@@ -10,4 +10,5 @@ export interface IRevenueItemProps extends DetailedHTMLProps<HTMLAttributes<HTML
   color?: string;
   handleDelete: (id: string, price: number, priceUsd: string) => void;
   icon?: string;
+  index: number;
 }

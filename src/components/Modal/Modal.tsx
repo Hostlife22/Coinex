@@ -78,6 +78,7 @@ const Modal = ({ handleClose, data, isOpen, openId }: IModalProps) => {
     };
 
     await updateStatistic({ userId: user?.user?.userId || '', statistics: newData });
+    handleClose();
   };
 
   return (

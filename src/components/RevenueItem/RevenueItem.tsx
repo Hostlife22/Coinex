@@ -21,6 +21,7 @@ const RevenueItem = ({
   uid,
   handleDelete,
   id,
+  index,
 }: IRevenueItemProps) => {
   const price = +priceUsd * amount;
   const { data, loading, error } = useQuery<IGetCrypto, getCryptoVariables>(GET_CRYPTO, {
@@ -51,7 +52,7 @@ const RevenueItem = ({
   const diffPercent = ((currentPrice - price) / price) * 100;
 
   return (
-    <li className={'revenue__elem'}>
+    <li className={'revenue__elem'} data-testid={`revenue-${index}`}>
       <div className={'revenue__elem-left'}>
         <div style={{ backgroundColor: color ? color : '#313135' }} className={'revenue__elem-div'}>
           <img src={icon ? icon : avatar} alt={name} />

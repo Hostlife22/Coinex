@@ -7,7 +7,7 @@ describe('tests the wallet screen', () => {
     preserve: 'signin',
   });
 
-  context('Receiving data with Graphql', () => {
+  context('authorization of the user', () => {
     before(() => {
       cy.fixture('userData.json').then((user: IUser) => {
         loginUser(user.email, user.password);

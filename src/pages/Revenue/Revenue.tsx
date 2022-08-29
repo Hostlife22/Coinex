@@ -95,7 +95,7 @@ function Revenue() {
 
           <ul className="revenue__list">
             {currentTableData.map((item, id) => (
-              <RevenueItem handleDelete={handleDelete} {...item} key={id} />
+              <RevenueItem handleDelete={handleDelete} {...item} index={id} key={id} />
             ))}
           </ul>
 
@@ -118,7 +118,7 @@ function Revenue() {
             </button>
           </div>
 
-          <ul>
+          <ul className="revenue__bottom">
             <li className={'revenue__item'}>
               <div className={'revenue__item-left'}>
                 <div style={{ backgroundColor: '#DC3434' }} className={'revenue__item-div'}>
