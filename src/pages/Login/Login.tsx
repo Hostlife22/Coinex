@@ -55,7 +55,7 @@ const Login = () => {
   };
 
   return (
-    <Card className="authorization">
+    <Card className="authorization" data-testid="authorization">
       <Htag className="authorization__heading" tag="h1">
         Sign In
       </Htag>
@@ -77,6 +77,7 @@ const Login = () => {
           error={errors.email}
           className="authorization__input"
           aria-invalid={errors.email ? 'true' : 'false'}
+          data-testid="auth-email"
         />
         <Input
           {...register('password', {
@@ -92,9 +93,14 @@ const Login = () => {
           error={errors.password}
           className="authorization__input"
           aria-invalid={errors.password ? 'true' : 'false'}
+          data-testid="auth-password"
         />
         <Checkbox className="authorization__checkbox" label="Remember me?" id="remember" />
-        <Button className="authorization__btn" appearance="primary" onClick={() => clearErrors()}>
+        <Button
+          className="authorization__btn"
+          appearance="primary"
+          onClick={() => clearErrors()}
+          data-testid="auth-submit">
           Sign In
         </Button>
       </UserForm>

@@ -15,7 +15,7 @@ const AuthLayout = () => {
   return (
     <main className="container">
       <Button appearance="primary" className="home-btn" onClick={() => navigate('/')}>
-        <FaHome title="Go home" />
+        <FaHome title="Go home" data-testid="go-home" />
       </Button>
       <Outlet />
       <ToastContainer autoClose={2000} />
