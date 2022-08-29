@@ -1,4 +1,6 @@
-import { v4 } from 'uuid';
+import { MESSAGES } from '../../src/common/constants';
+import { IUserRegister } from '../support/interface';
+import { registerUser } from './utils';
 
 describe('tests the register screen', () => {
   beforeEach(() => {
@@ -35,15 +37,16 @@ describe('tests the register screen', () => {
     cy.url().should('eq', 'http://localhost:3000/register');
   });
 
-  it.skip('should check the registration of the new user', () => {
-    const uniqEmail = `bob.${v4().slice(0, 10)}@gmail.com`;
-    cy.get('[data-testid="register-firstName"]').type('Bob');
-    cy.get('[data-testid="register-lastName"]').type('Marley');
-    cy.get('[data-testid="register-email"]').type(uniqEmail);
-    cy.get('[data-testid="register-phone"]').type('575294401137');
-    cy.get('[data-testid="register-password"]').type('password');
-    cy.get('[data-testid="register-confirmPassword"]').type('password');
+  it('should check the registration of the new user', () => {
+    cy.fixture('registerData.json').then((user: IUserRegister) => {
+      registerUser({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+        password: user.password,
+      });
+    });
 
-    cy.get('[data-testid="register-submit"]').click();
+    cy.contains(MESSAGES.signUp.success).should('exist');
   });
 });

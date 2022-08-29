@@ -1,3 +1,6 @@
+import { IUser } from '../support/interface';
+import { loginUser } from './utils';
+
 describe('tests the authorization screen', () => {
   beforeEach(() => {
     cy.visit('/auth');
@@ -34,8 +37,8 @@ describe('tests the authorization screen', () => {
   });
 
   it(' should be checked authorization', () => {
-    cy.get('[data-testid="auth-email"]').type('example@gmail.com');
-    cy.get('[data-testid="auth-password"]').type('password');
-    cy.get('[data-testid="auth-submit"]').click();
+    cy.fixture('userData.json').then((user: IUser) => {
+      loginUser(user.email, user.password);
+    });
   });
 });

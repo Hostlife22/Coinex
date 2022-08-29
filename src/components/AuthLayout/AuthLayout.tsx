@@ -18,7 +18,7 @@ const AuthLayout = () => {
         <FaHome title="Go home" />
       </Button>
       <Outlet />
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} data-testid="toast" />
     </main>
   );
 };

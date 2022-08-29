@@ -27,7 +27,7 @@ const Layout = () => {
         <Header isOpen={openSidebar} handleMenu={handleMenu} />
         <Outlet />
       </main>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} data-testid="toast" />
     </div>
   );
 };
