@@ -15,39 +15,40 @@ export class Dimensions {
 const dimensions = new Dimensions(360, 360);
 
 const DonutChart = (props: IDonutChartProps) => {
-  const svgRef = useRef<SVGSVGElement | null>(null);
+  const svgRef = useRef<HTMLDivElement | null>(null);
   const [selection, setSelection] = useState<null | d3.Selection<
-    SVGSVGElement | null,
+    HTMLDivElement | null,
     unknown,
     null,
     undefined
   >>(null);
   const dataP = props.data || [];
 
+  console.log(dataP);
+
   const pie = d3
     .pie<Data>()
     .value((d) => d.value)
     .sort(null);
-  // .padAngle(0.04);
 
   const arc = d3
     .arc<d3.PieArcDatum<Data>>()
     .innerRadius(250 / 3)
     .outerRadius(dimensions.radius * 0.9);
-  // .cornerRadius(3);
 
   const color = d3.scaleOrdinal(d3.schemeSet3);
 
-  useEffect(() => {
+  const drawChart = () => {
     if (!selection) {
       setSelection(d3.select(svgRef.current));
     } else {
       const svg = selection
+        .append('svg')
+        .attr('id', 'DonutChart')
         .attr('width', dimensions.width)
         .attr('height', dimensions.height)
         .attr('viewBox', `0 0 ${dimensions.height} ${dimensions.width}`)
         .append('g')
-
         .attr('transform', `translate(${dimensions.width / 2},${dimensions.height / 2})`);
 
       svg
@@ -57,8 +58,6 @@ const DonutChart = (props: IDonutChartProps) => {
         .append('path')
         .attr('d', arc)
         .attr('fill', (_, i) => color(String(i)))
-        // .attr('stroke', 'white')
-        // .style('stroke-width', '3px')
         .style('cursor', 'pointer')
         .on('mouseover', function (d, i) {
           const data = (d3.select(this).data() as [IDataEvent])[0].data;
@@ -119,16 +118,22 @@ const DonutChart = (props: IDonutChartProps) => {
         .attr('font-size', 'calc(1rem + 0.1vw)')
         .attr('dy', '2em');
     }
-  }, [selection]);
+  };
 
-  return (
-    <div className="DonutChart">
-      <svg ref={svgRef} />
-    </div>
-  );
+  const reDrawChart = () => {
+    d3.select(svgRef.current).select('#DonutChart').remove();
+    drawChart();
+  };
+
+  useEffect(() => {
+    drawChart();
+  }, []);
+
+  useEffect(() => {
+    reDrawChart();
+  }, [dataP]);
+
+  return <div id="DonutChart" ref={svgRef}></div>;
 };
 
 export default DonutChart;
-
-// https://plutusimulator.web.app/#/
-// https://github.com/Kelvin-Hui/Plutus/blob/c19b09772c1b98bfb721f9897d5b97b522a5193d/client/src/Components/Dashboard/PortfolioChart/DonutChart.js
