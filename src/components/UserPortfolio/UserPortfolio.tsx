@@ -16,7 +16,6 @@ import { Data, IOptionData } from '../../pages/Revenue/Revenue.interface';
 import Diveder from '../Diveder/Diveder';
 import DonutChart from '../DonutChart/DonutChart';
 import Htag from '../Htag/Htag';
-import Ptag from '../Ptag/Ptag';
 import { IUserPortfolio } from './UserPortfolio.interface';
 import './UserPortfolio.scss';
 
@@ -63,9 +62,9 @@ const UserPortfolio = ({ dataCurrentPage }: IUserPortfolio) => {
       <Htag tag="h1" className="user-portfolio__title">
         Hey {user.user.firstName}! Welcome Back!
       </Htag>
-      <Ptag size="l" className="user-portfolio__subtitle">
+      <Htag tag="h2" className="user-portfolio__subtitle">
         Here's Your Performance
-      </Ptag>
+      </Htag>
       {!loading && chartData.length > 0 && (
         <div className="user-portfolio__wrapper">
           <DonutChart data={chartData} total={amountPrice} cb={(id: string) => navigation(`/crypto/${id}`)} />
