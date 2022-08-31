@@ -20,3 +20,4 @@ export { default as RevenueItem } from './RevenueItem/RevenueItem';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as UserForm } from './UserForm/UserForm';
 export { default as UserPanel } from './UserPanel/UserPanel';
+export { default as UserPortfolio } from './UserPortfolio/UserPortfolio';

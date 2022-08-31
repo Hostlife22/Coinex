@@ -1,12 +1,15 @@
 import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
 import { FaSadTear, FaSpinner } from 'react-icons/fa';
 import { Button, Diveder } from '..';
 import { GET_CRYPTO } from '../../apollo/queries/cryptoQuery';
 import { getCryptoVariables } from '../../apollo/queries/__generated__/getCrypto';
+import { useAppDispatch } from '../../app/hooks';
 import avatar from '../../assets/user.png';
 import { IGetCrypto } from '../../common/crypto.interface';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
+import { setCryptoDetails } from '../../features/settings/settingsSlice';
 import Ptag from '../Ptag/Ptag';
 import { IRevenueItemProps } from './RevenueItem.interface';
 import './RevenueItem.scss';
@@ -23,10 +26,25 @@ const RevenueItem = ({
   id,
   index,
 }: IRevenueItemProps) => {
-  const price = +priceUsd * amount;
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
+  const dispatch = useAppDispatch();
   const { data, loading, error } = useQuery<IGetCrypto, getCryptoVariables>(GET_CRYPTO, {
     variables: { id: id || '' },
   });
+  const price = +priceUsd * amount;
+
+  useEffect(() => {
+    if (data?.asset) {
+      const updatedPrice = +data.asset.priceUsd;
+      setCurrentPrice(updatedPrice * amount);
+    }
+  }, [data?.asset]);
+
+  useEffect(() => {
+    if (currentPrice) {
+      dispatch(setCryptoDetails({ oldPrice: price, currentPrice }));
+    }
+  }, [currentPrice]);
 
   if (loading) {
     return (
@@ -48,7 +66,6 @@ const RevenueItem = ({
     );
   }
 
-  const currentPrice = Number(data?.asset.priceUsd || 0) * amount;
   const diffPercent = ((currentPrice - price) / price) * 100;
 
   return (

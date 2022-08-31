@@ -1,28 +1,27 @@
-import { useQuery } from '@apollo/client';
 import { format } from 'date-fns';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FaCartPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { GET_CRYPTOS } from '../../apollo/queries/cryptoQuery';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import icon from '../../assets/user.png';
 import { PAGE_SIZE_SM } from '../../common/constants';
-import { IGetCryptos } from '../../common/crypto.interface';
-import { Card, Diveder, DonutChart, Htag, Pagination, Ptag, RevenueItem } from '../../components';
+import { Card, Diveder, Htag, Pagination, Ptag, RevenueItem, UserPortfolio } from '../../components';
+import { resetCryptoDetails } from '../../features/settings/settingsSlice';
 import { usePutStatisticMutation } from '../../features/statistic/statisticApiSlice';
 import { selectStatistic } from '../../features/statistic/statisticSlice';
 import { IStatisticState } from '../../features/statistic/statisticSlice.interface';
 import { useAuth } from '../../hooks/useAuth';
-import { Data, IOptionData } from './Revenue.interface';
 import './Revenue.scss';
 
 function Revenue() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [updateStatistic, { isLoading }] = usePutStatisticMutation();
+  const [updateStatistic] = usePutStatisticMutation();
   const selectedStatistic = useAppSelector(selectStatistic);
-  const { loading, data } = useQuery<IGetCryptos>(GET_CRYPTOS);
+  const dispatch = useAppDispatch();
   const { user } = useAuth();
-  const navigation = useNavigate();
+
+  useEffect(() => {
+    dispatch(resetCryptoDetails());
+  }, [dispatch]);
 
   const amountPrice = useMemo(
     () =>
@@ -70,46 +69,13 @@ function Revenue() {
     });
   };
 
-  const chartData: Data[] = Object.entries(
-    selectedStatistic.currency.reduce((acc, curr) => {
-      const currency = data?.assets.find((i) => i.name === curr.name);
-      const name = currency ? currency.symbol : curr.name;
-
-      if (!acc[name]) {
-        acc[name] = {
-          id: curr.id,
-          value: curr.amount * +curr.priceUsd,
-        };
-      } else {
-        acc[name] = {
-          ...acc[name],
-          value: curr.amount * +curr.priceUsd + acc[name].value,
-        };
-      }
-
-      return acc;
-    }, {} as IOptionData),
-  ).map((i) => ({ item: i[0], value: i[1].value, id: i[1].id }));
-
-  console.log(selectedStatistic.currency);
-  console.log(chartData);
-
   return (
     <div className="revenue">
       <Card className="revenue__container">
         <div className={'revenue__overview'}>
-          <Htag tag="h2" className="revenue__date-range">
-            01 - {format(new Date(), 'dd MMMM yyyy')}
-          </Htag>
+          <UserPortfolio dataCurrentPage={currentTableData} />
 
-          {!loading && chartData.length > 0 && (
-            <DonutChart
-              data={chartData}
-              total={amountPrice}
-              cb={(cryptoId: string) => navigation(`/crypto/${cryptoId}`)}
-            />
-          )}
-          <Htag tag="h1" className="home__title">
+          <Htag tag="h2" className="revenue__title">
             Crypto Spreadsheet
           </Htag>
           <ul className="revenue__list">
@@ -123,7 +89,10 @@ function Revenue() {
               currentPage={currentPage}
               total={selectedStatistic?.currency.length || 0}
               pageSize={3}
-              onPageChange={(page) => setCurrentPage(page)}
+              onPageChange={(page) => {
+                dispatch(resetCryptoDetails());
+                setCurrentPage(page);
+              }}
             />
           )}
           <div className={'revenue__overview-header'}>

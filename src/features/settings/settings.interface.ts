@@ -1,8 +1,11 @@
-import { ICoin } from '../../common/crypto.interface';
-
 export interface ISettingsState {
-  favoriteCurrencies: ICoin[];
-  amountUSD: number;
   diff: number;
+  oldPrice: number;
+  currentPrice: number;
   searchCrypto: string;
+}
+
+export interface ISettingsPayload {
+  oldPrice: number;
+  currentPrice: number;
 }
