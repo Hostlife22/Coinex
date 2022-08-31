@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+import cn from 'classnames';
 import millify from 'millify';
 import { useMemo } from 'react';
 import { BsBarChartFill, BsCashStack, BsFillCreditCardFill } from 'react-icons/bs';
@@ -70,16 +71,24 @@ const UserPortfolio = ({ dataCurrentPage }: IUserPortfolio) => {
           <DonutChart data={chartData} total={amountPrice} cb={(id: string) => navigation(`/crypto/${id}`)} />
           <ul className="user-portfolio__details">
             <li className="user-portfolio__item">
-              <BsCashStack /> Cash value: $ {millify(total)}
+              <BsCashStack />
+              Current balance: $ {millify(total)}
             </li>
             <li className="user-portfolio__item">
-              <BsFillCreditCardFill /> {formatAsCurrency(oldPrice)}
+              <BsFillCreditCardFill /> Purchased for the amount: {formatAsCurrency(oldPrice)}
             </li>
             <li className="user-portfolio__item">
-              <BsFillCreditCardFill /> {formatAsCurrency(currentPrice)}
+              <BsFillCreditCardFill /> Present value: {formatAsCurrency(currentPrice)}
             </li>
             <li className="user-portfolio__item">
-              <BsBarChartFill /> Total Return {(currentPrice - oldPrice).toFixed(2)} ({formatAsPercent(diff)})
+              <BsBarChartFill /> Total Return:{' '}
+              <span
+                className={cn({
+                  'user-portfolio__up': diff > 0,
+                  'user-portfolio__down': diff < 0,
+                })}>
+                {(currentPrice - oldPrice).toFixed(2)} ({formatAsPercent(diff)})
+              </span>
             </li>
           </ul>
         </div>

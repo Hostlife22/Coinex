@@ -24,8 +24,6 @@ const DonutChart = (props: IDonutChartProps) => {
   >>(null);
   const dataP = props.data || [];
 
-  console.log(dataP);
-
   const pie = d3
     .pie<Data>()
     .value((d) => d.value)
@@ -44,7 +42,7 @@ const DonutChart = (props: IDonutChartProps) => {
     } else {
       const svg = selection
         .append('svg')
-        .attr('id', 'DonutChart')
+        .attr('id', 'donutChart')
         .attr('width', dimensions.width)
         .attr('height', dimensions.height)
         .attr('viewBox', `0 0 ${dimensions.height} ${dimensions.width}`)
@@ -52,7 +50,7 @@ const DonutChart = (props: IDonutChartProps) => {
         .attr('transform', `translate(${dimensions.width / 2},${dimensions.height / 2})`);
 
       svg
-        .selectAll('DonutLine')
+        .selectAll('donutLine')
         .data(pie(dataP))
         .enter()
         .append('path')
@@ -82,7 +80,7 @@ const DonutChart = (props: IDonutChartProps) => {
         });
 
       svg
-        .selectAll('DonutLine')
+        .selectAll('donutLine')
         .data(pie(dataP))
         .enter()
         .append('text')
@@ -121,7 +119,7 @@ const DonutChart = (props: IDonutChartProps) => {
   };
 
   const reDrawChart = () => {
-    d3.select(svgRef.current).select('#DonutChart').remove();
+    d3.select(svgRef.current).select('#donutChart').remove();
     drawChart();
   };
 
@@ -133,7 +131,7 @@ const DonutChart = (props: IDonutChartProps) => {
     reDrawChart();
   }, [dataP]);
 
-  return <div id="DonutChart" ref={svgRef}></div>;
+  return <div className="donutChart" ref={svgRef}></div>;
 };
 
 export default DonutChart;

@@ -9,6 +9,7 @@
   }
 
   &__subtitle {
+    color: var(--color-primary);
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -34,6 +35,34 @@
 
     > svg {
       fill: var(--color-primary);
+    }
+  }
+
+  &__down {
+    color: #f36666;
+  }
+
+  &__up {
+    color: #66f366;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .user-portfolio {
+    &__wrapper {
+      flex-direction: column-reverse;
+      gap: 20px;
+      align-items: initial;
+    }
+
+    &__details {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    &__item {
+      flex-basis: 320px;
     }
   }
 }
