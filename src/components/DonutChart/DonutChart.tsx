@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from 'react';
-import { Data, IDataEvent } from './DonutChart.interface';
+import { Data } from '../../pages/Revenue/Revenue.interface';
+import { IDataEvent, IDonutChartProps } from './DonutChart.interface';
 import './DonutChart.scss';
 
 export class Dimensions {
@@ -13,30 +14,7 @@ export class Dimensions {
 
 const dimensions = new Dimensions(360, 360);
 
-const dataP = [
-  {
-    item: 'A',
-    value: 590,
-  },
-  {
-    item: 'B',
-    value: 290,
-  },
-  {
-    item: 'C',
-    value: 348,
-  },
-  {
-    item: 'D',
-    value: 145,
-  },
-  {
-    item: 'E',
-    value: 46,
-  },
-];
-
-const DonutChart = () => {
+const DonutChart = (props: IDonutChartProps) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [selection, setSelection] = useState<null | d3.Selection<
     SVGSVGElement | null,
@@ -44,18 +22,19 @@ const DonutChart = () => {
     null,
     undefined
   >>(null);
+  const dataP = props.data || [];
 
   const pie = d3
     .pie<Data>()
     .value((d) => d.value)
     .sort(null);
-  // .padAngle(0.2);
+  // .padAngle(0.04);
 
   const arc = d3
     .arc<d3.PieArcDatum<Data>>()
-    .innerRadius(256 / 3)
-    .outerRadius(dimensions.radius)
-    .cornerRadius(5);
+    .innerRadius(250 / 3)
+    .outerRadius(dimensions.radius * 0.9);
+  // .cornerRadius(3);
 
   const color = d3.scaleOrdinal(d3.schemeSet3);
 
@@ -78,34 +57,28 @@ const DonutChart = () => {
         .append('path')
         .attr('d', arc)
         .attr('fill', (_, i) => color(String(i)))
-        .attr('stroke', '#ff971d')
-        .style('stroke-width', '3px')
+        // .attr('stroke', 'white')
+        // .style('stroke-width', '3px')
         .style('cursor', 'pointer')
         .on('mouseover', function (d, i) {
           const data = (d3.select(this).data() as [IDataEvent])[0].data;
-          console.log(data);
 
           d3.select('#text1').text(data.item);
-          d3.select('#text2').text('$' + (20000 * data.value).toFixed(2));
-          d3.select('#text3')
-            .text((data.value * 100).toFixed(2) + '%')
-            .style('font-weight', 'bold');
+          d3.select('#text2').text('$' + data.value.toFixed(2));
+          d3.select('#text3').text((data.value / (props.total / 100)).toFixed(2) + '%');
           d3.select(this).transition().duration(50).attr('opacity', 0.75);
         })
         .on('click', function (d) {
-          var data = (d3.select(this).data() as [IDataEvent])[0].data;
+          const data = (d3.select(this).data() as [IDataEvent])[0].data;
 
-          // if (data.key !== 'Cash') {
-          //   setNav({
-          //     currentPage: 'Search Quote',
-          //     symbol: (d3.select(this).data() as [IDataEvent])[0].data.key,
-          //   });
-          // }
+          if (data.id && props.cb) {
+            props.cb(data.id);
+          }
         })
         .on('mouseout', function (d, i) {
-          d3.select('#text1').text('');
-          d3.select('#text2').text('');
-          d3.select('#text3').text('');
+          d3.select('#text1').text('Purchase');
+          d3.select('#text2').text(`$${props.total.toFixed(2)}`);
+          d3.select('#text3').text('100%');
           d3.select(this).transition().duration(50).attr('opacity', 1);
         });
 
@@ -127,6 +100,7 @@ const DonutChart = () => {
       svg
         .append('text')
         .attr('id', 'text1')
+        .text('Purchase')
         .attr('text-anchor', 'middle')
         .attr('font-size', 'calc(1rem + 0.1vw)')
         .attr('font-weight', 'bold')
@@ -134,11 +108,13 @@ const DonutChart = () => {
       svg
         .append('text')
         .attr('id', 'text2')
+        .text(`$${props.total.toFixed(2)}`)
         .attr('text-anchor', 'middle')
         .attr('font-size', 'calc(1rem + 0.1vw)');
       svg
         .append('text')
         .attr('id', 'text3')
+        .text(`100%`)
         .attr('text-anchor', 'middle')
         .attr('font-size', 'calc(1rem + 0.1vw)')
         .attr('dy', '2em');
@@ -153,3 +129,6 @@ const DonutChart = () => {
 };
 
 export default DonutChart;
+
+// https://plutusimulator.web.app/#/
+// https://github.com/Kelvin-Hui/Plutus/blob/c19b09772c1b98bfb721f9897d5b97b522a5193d/client/src/Components/Dashboard/PortfolioChart/DonutChart.js

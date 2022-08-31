@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { setupApiStore } from '../app/api/setupApiStore';
-import { userApi } from '../app/api/userApi';
-import authReducer from '../features/auth/authSlice';
+import { setupApiStore } from '../../app/api/setupApiStore';
+import { userApi } from '../../app/api/userApi';
+import authReducer from '../../features/auth/authSlice';
 
 interface IProps {
   children: ReactNode;

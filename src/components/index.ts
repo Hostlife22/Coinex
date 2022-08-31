@@ -6,6 +6,7 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as CryptoDetails } from './CryptoDetails/CryptoDetails';
 export { default as Currency } from './Currency/Currency';
 export { default as Diveder } from './Diveder/Diveder';
+export { default as DonutChart } from './DonutChart/DonutChart';
 export { default as Header } from './Header/Header';
 export { default as Htag } from './Htag/Htag';
 export { default as Input } from './Input/Input';

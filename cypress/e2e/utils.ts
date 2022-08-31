@@ -35,8 +35,6 @@ export function loginUser(email: string, password: string) {
       cy.get('[data-testid="auth-password"]').should('be.visible').type(password);
       cy.get('[data-testid="auth-submit"]').click();
     });
-
-  // cy.location('pathname').should('equal', '/');
 }
 
 export function deposit(sum: number) {
