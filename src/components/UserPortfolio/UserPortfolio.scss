@@ -1,0 +1,39 @@
+.user-portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__title,
+  &__subtitle {
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    > svg {
+      fill: var(--color-primary);
+    }
+  }
+}
