@@ -10,7 +10,7 @@ const Logo = ({ handleMenu, isOpen, className, ...props }: ILogoProps) => {
   const matches = useMediaQuery('(max-width: 630px)');
 
   return (
-    <div className={cn(className, 'logo', { logo_close: isOpen })} {...props}>
+    <div className={cn(className, 'logo', { logo_close: isOpen })} {...props} data-testid="logo">
       <div className="logo__container">
         <span className="logo__image">
           <img src={logo} alt="logo" />
