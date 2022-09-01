@@ -13,7 +13,7 @@ import { ICoin, IGetCryptos } from '../../common/crypto.interface';
 import { comparePrice } from '../../common/helpers/comparePrice';
 import { formatAsCurrency } from '../../common/helpers/formatAsCurrency';
 import { formatAsPercent } from '../../common/helpers/formatAsPercent';
-import { selectSearchQuery, setSearchCrypto } from '../../features/settings/settingsSlice';
+import { selectSettings, setSearchCrypto } from '../../features/settings/settingsSlice';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import './Currency.scss';
 
@@ -23,7 +23,7 @@ function Currency() {
   const [change, setChange] = useState<{ [key: string]: string } | null>(null);
   const { loading, data } = useQuery<IGetCryptos>(GET_CRYPTOS);
   const navigation = useNavigate();
-  const searchQuery = useAppSelector(selectSearchQuery);
+  const { searchCrypto } = useAppSelector(selectSettings);
   const matches = useMediaQuery('(max-width: 820px)');
   const dispatch = useAppDispatch();
 
@@ -87,17 +87,17 @@ function Currency() {
     return [...assetsList]
       .sort((a, b) => +b.changePercent24Hr - +a.changePercent24Hr)
       .filter(({ name, id, symbol }) =>
-        [name, id, symbol].some((each) => each.toLowerCase().includes(searchQuery.toLowerCase())),
+        [name, id, symbol].some((each) => each.toLowerCase().includes(searchCrypto.toLowerCase())),
       )
       .slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, assetsList, searchQuery]);
+  }, [currentPage, assetsList, searchCrypto]);
 
   return (
     <div className="cryptocurrency">
       <Input
         placeholder="Search ..."
         className="cryptocurrency__input"
-        value={searchQuery}
+        value={searchCrypto}
         onChange={(e) => {
           dispatch(setSearchCrypto(e.target.value));
         }}
@@ -182,7 +182,7 @@ function Currency() {
           </tbody>
         </table>
       )}
-      {currentTableData.length === 0 && searchQuery && (
+      {currentTableData.length === 0 && searchCrypto && (
         <div className="cryptocurrency__no-results" data-testid="img-no-results">
           <img src={empty} alt="empty" />
         </div>

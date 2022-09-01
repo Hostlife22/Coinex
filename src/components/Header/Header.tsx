@@ -33,7 +33,7 @@ const Header = ({ handleMenu, isOpen }: IHeaderProps) => {
     <header className="header" data-testid="header">
       <div className="header__container">
         <Logo handleMenu={handleMenu} isOpen={isOpen} className="header__logo" />
-        <div className="header__coines">
+        <div className="header__coines" data-testid="header-conies">
           {currentTableData.map((coin) => (
             <div key={coin.id} className="header__coin">
               <Ptag size="s">

@@ -33,6 +33,5 @@ export const settingsSlice = createSlice({
 export const { setSearchCrypto, setCryptoDetails, resetCryptoDetails } = settingsSlice.actions;
 
 export const selectSettings = (state: RootState) => state.settings;
-export const selectSearchQuery = (state: RootState) => state.settings.searchCrypto;
 
 export default settingsSlice.reducer;
