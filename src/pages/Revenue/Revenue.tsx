@@ -76,7 +76,7 @@ function Revenue() {
           <UserPortfolio dataCurrentPage={currentTableData} />
 
           <Htag tag="h2" className="revenue__title">
-            Crypto Spreadsheet
+            Your purchases
           </Htag>
           <ul className="revenue__list">
             {currentTableData.map((item, id) => (

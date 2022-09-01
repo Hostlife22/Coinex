@@ -1,18 +1,9 @@
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from 'react';
+import { Dimensions } from '../../common/constants';
 import { Data } from '../../pages/Revenue/Revenue.interface';
 import { IDataEvent, IDonutChartProps } from './DonutChart.interface';
 import './DonutChart.scss';
-
-export class Dimensions {
-  public radius: number;
-
-  constructor(public width: number, public height: number) {
-    this.radius = Math.min(width, height) / 2;
-  }
-}
-
-const dimensions = new Dimensions(360, 360);
 
 const DonutChart = (props: IDonutChartProps) => {
   const svgRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +13,8 @@ const DonutChart = (props: IDonutChartProps) => {
     null,
     undefined
   >>(null);
-  const dataP = props.data || [];
+  const values = props.data || [];
+  const dimensions = props.dimensions || new Dimensions(360, 360);
 
   const pie = d3
     .pie<Data>()
@@ -51,7 +43,7 @@ const DonutChart = (props: IDonutChartProps) => {
 
       svg
         .selectAll('donutLine')
-        .data(pie(dataP))
+        .data(pie(values))
         .enter()
         .append('path')
         .attr('d', arc)
@@ -81,7 +73,7 @@ const DonutChart = (props: IDonutChartProps) => {
 
       svg
         .selectAll('donutLine')
-        .data(pie(dataP))
+        .data(pie(values))
         .enter()
         .append('text')
         .style('font-weight', 'bold')
@@ -125,11 +117,11 @@ const DonutChart = (props: IDonutChartProps) => {
 
   useEffect(() => {
     drawChart();
-  }, []);
+  }, [selection]);
 
   useEffect(() => {
     reDrawChart();
-  }, [dataP]);
+  }, [values]);
 
   return <div className="donutChart" ref={svgRef}></div>;
 };

@@ -42,3 +42,11 @@ export const API = Object.freeze({
     getUrl: (id: string) => `users/${id}/statistics`,
   },
 });
+
+export class Dimensions {
+  public radius: number;
+
+  constructor(public width: number, public height: number) {
+    this.radius = Math.min(width, height) / 2;
+  }
+}
