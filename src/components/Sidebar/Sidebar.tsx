@@ -2,13 +2,13 @@ import cn from 'classnames';
 import { FaSearch } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectSearchQuery, setSearchCrypto } from '../../features/settings/settingsSlice';
+import { selectSettings, setSearchCrypto } from '../../features/settings/settingsSlice';
 import MenuList from '../MenuList/MenuList';
 import { ISidebarProps } from './Sidebar.interface';
 import './Sidebar.scss';
 
 const Sidebar = ({ isOpen, handleMenu, matches }: ISidebarProps) => {
-  const searchValue = useAppSelector(selectSearchQuery);
+  const { searchCrypto } = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, handleMenu, matches }: ISidebarProps) => {
 
                 <input
                   placeholder="Search..."
-                  value={searchValue}
+                  value={searchCrypto}
                   onChange={onChange}
                   data-testid="search-input"
                 />
