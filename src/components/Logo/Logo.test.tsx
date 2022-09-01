@@ -50,4 +50,13 @@ describe('Logo component', () => {
     rerender(<Logo isOpen={false} handleMenu={handleMenu} />);
     expect(screen.getByTestId('logo')).not.toHaveClass('logo_close');
   });
+
+  it('logo snapshot', () => {
+    const mediaQuery = '(min-width: 630px)';
+    matchMedia.useMediaQuery(mediaQuery);
+
+    const view = render(<Logo isOpen={true} handleMenu={handleMenu} />);
+
+    expect(view).toMatchSnapshot();
+  });
 });

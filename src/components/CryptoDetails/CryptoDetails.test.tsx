@@ -74,4 +74,10 @@ describe('CryptoDetails', () => {
     expect(screen.getByText(VWAP)).toBeInTheDocument();
     expect(aprrovedSupply).toBeDefined();
   });
+
+  it('cryptoDetails snapshot', () => {
+    const view = render(<CryptoDetails {...props} />);
+
+    expect(view).toMatchSnapshot();
+  });
 });

@@ -27,4 +27,14 @@ describe('MenuList component', () => {
     expect(activeLink).toBeInTheDocument();
     expect(activeLink).toHaveTextContent(/dashboard/i);
   });
+
+  it('MenuList snapshot', () => {
+    const view = render(
+      <ElemProvider route="/">
+        <MenuList />
+      </ElemProvider>,
+    );
+
+    expect(view).toMatchSnapshot();
+  });
 });
