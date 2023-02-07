@@ -1,4 +1,4 @@
-# Coinex
+# CoineX
 
 ### [Site link](https://iridescent-medovik-abeabb.netlify.app/)
 
